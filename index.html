@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdi Creator Hub — Dashboard Campaign</title>
+<title>Abdi Creator Hub — Collaboration & Decision Campaign Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
@@ -26,8 +26,8 @@
 <style>
   :root{
     --bg:#F7F7FC;
-    --sidebar:#1B1140;
-    --sidebar-hi:#2C1E68;
+    --sidebar:#F3EFFC;
+    --sidebar-hi:#E4D9FA;
     --card:#FFFFFF;
     --border:#EAE7F5;
     --text:#1F1B33;
@@ -54,23 +54,28 @@
 
   /* ---------- Sidebar ---------- */
   aside{
-    background:linear-gradient(180deg,var(--sidebar) 0%, #150C33 100%);
-    color:#E6E1FF;padding:26px 18px;position:sticky;top:0;height:100vh;overflow-y:auto;
+    background:linear-gradient(180deg,var(--sidebar) 0%, #FAF8FF 100%);
+    color:#3A3360;padding:26px 18px;position:sticky;top:0;height:100vh;overflow-y:auto;border-right:1px solid var(--border);
   }
   @media (max-width:860px){aside{position:relative;height:auto;}}
-  .logo{display:flex;align-items:center;gap:10px;padding:0 8px 24px;margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .logo{display:flex;align-items:center;gap:10px;padding:0 8px 24px;margin-bottom:16px;border-bottom:1px solid rgba(27,17,64,0.08);}
   .logo .mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--violet),var(--coral));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;}
-  .logo .name{font-size:14.5px;font-weight:700;line-height:1.25;}
-  .logo .sub{font-size:11px;color:#A79FD6;font-weight:500;}
+  .logo .name{font-size:14.5px;font-weight:700;line-height:1.25;color:#241C48;}
+  .logo .sub{font-size:11px;color:#7A72A8;font-weight:500;}
   nav.side-nav{display:flex;flex-direction:column;gap:3px;}
   nav.side-nav button{
     display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;border:none;background:transparent;
-    color:#C9C2EE;font-size:13.5px;font-weight:500;cursor:pointer;text-align:left;width:100%;transition:background .15s,color .15s;
+    color:#5B5480;font-size:13.5px;font-weight:500;cursor:pointer;text-align:left;width:100%;transition:background .15s,color .15s;
   }
   nav.side-nav button .ic{width:22px;text-align:center;font-size:15px;}
-  nav.side-nav button:hover{background:rgba(255,255,255,0.06);color:#fff;}
-  nav.side-nav button.active{background:var(--sidebar-hi);color:#fff;box-shadow:inset 3px 0 0 var(--coral);}
-  .side-foot{margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.08);font-size:11.5px;color:#8D84BC;line-height:1.6;}
+  nav.side-nav button:hover{background:rgba(124,58,237,0.08);color:#241C48;}
+  nav.side-nav button.active{background:var(--sidebar-hi);color:#3B1F8C;box-shadow:inset 3px 0 0 var(--coral);}
+
+  /* ---------- Main ---------- */
+  .side-author{margin-top:26px;padding-top:18px;border-top:1px solid rgba(27,17,64,0.08);font-size:11px;color:#7A72A8;line-height:1.55;}
+  .side-author .sa-label{color:#5B3FA8;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;}
+  .side-author .sa-value{color:#463D75;margin-bottom:10px;}
+  .side-author .sa-value:last-child{margin-bottom:0;}
 
   /* ---------- Main ---------- */
   main{padding:30px 34px 60px;max-width:1280px;}
@@ -153,7 +158,7 @@
 
   /* ---------- About / Pitch cover ---------- */
   .about-hero{
-    background:linear-gradient(135deg,var(--sidebar) 0%,#3B1F8C 55%,var(--coral) 130%);
+    background:linear-gradient(135deg,#1B1140 0%,#3B1F8C 55%,var(--coral) 130%);
     border-radius:20px;padding:40px 38px;color:#fff;margin-bottom:20px;position:relative;overflow:hidden;
     box-shadow:var(--shadow);
   }
@@ -212,10 +217,12 @@
       <button data-page="rekomendasi"><span class="ic">💡</span>Rekomendasi</button>
       <button data-page="keputusan"><span class="ic">✅</span>Keputusan</button>
     </nav>
-    <div class="side-foot"><div class="author-row"><div class="author-label">Created By</div><div class="author-value">Diana Putri Irawati <span class="author-id">(255288010)</span></div></div>
-        <div class="author-row"><div class="author-label">Supervised By</div><div class="author-value">Rivan Sutrisno, SE., MA., PhD.</div></div>
-        <div class="author-row"><div class="author-label">Programme</div><div class="author-value">Master's Programme in Marketing, Innovation and Technology, Department of Business Administration</div></div>
-        <div class="author-row"><div class="author-label">Institution</div><div class="author-value">Politeknik Negeri Bandung (Polban)</div></div></div>
+    <div class="side-author">
+      <div class="sa-label">Created By</div>
+      <div class="sa-value">Diana Putri Irawati (255288010)<br>Master's Programme in Marketing, Innovation and Technology, Department of Business Administration. Polban.</div>
+      <div class="sa-label">Supervised By</div>
+      <div class="sa-value">Rivan Sutrisno, SE., MA., PhD.</div>
+    </div>
   </aside>
 
   <main>
