@@ -5,311 +5,342 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abdi Creator Hub — Dashboard Campaign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
 <style>
   :root{
-    --bg:#F5F7FA;
+    --bg:#F7F7FC;
+    --sidebar:#1B1140;
+    --sidebar-hi:#2C1E68;
     --card:#FFFFFF;
-    --border:#E4E8EE;
-    --text:#1A2233;
-    --text-muted:#6B7280;
-    --primary:#4F46E5;
-    --primary-soft:#EEF0FF;
-    --teal:#0EA5A5;
-    --teal-soft:#E3FAF9;
-    --amber:#D97706;
-    --amber-soft:#FEF3E2;
-    --red:#DC2626;
-    --red-soft:#FDECEC;
-    --green:#16A34A;
-    --green-soft:#E9F9EF;
-    --radius:12px;
-    --shadow:0 1px 2px rgba(16,24,40,0.05), 0 1px 3px rgba(16,24,40,0.06);
+    --border:#EAE7F5;
+    --text:#1F1B33;
+    --muted:#716C87;
+    --violet:#7C3AED; --violet-soft:#F1EBFF;
+    --coral:#FB7185;  --coral-soft:#FFEAEE;
+    --teal:#0EA5A5;   --teal-soft:#E1F7F5;
+    --amber:#F59E0B;  --amber-soft:#FFF4DE;
+    --green:#10B981;  --green-soft:#E6FBF1;
+    --red:#EF4444;    --red-soft:#FDECEC;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(27,17,64,0.04), 0 4px 14px rgba(27,17,64,0.06);
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0;background:var(--bg);color:var(--text);
-    font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit;}
-  :focus-visible{outline:2px solid var(--primary);outline-offset:2px;}
-  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
-  .wrap{max-width:1280px;margin:0 auto;padding:0 24px;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif;margin:0;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;}
+  :focus-visible{outline:2px solid var(--violet);outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important;}}
 
-  /* Topbar */
-  header.top{
-    position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border);
-  }
-  header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:20px;}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;}
-  .logo .mark{width:32px;height:32px;border-radius:8px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;}
-  .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;}
-  .tabs::-webkit-scrollbar{display:none;}
-  .tabs a{
-    font-size:13.5px;font-weight:500;color:var(--text-muted);text-decoration:none;white-space:nowrap;
-    padding:8px 14px;border-radius:8px;
-  }
-  .tabs a:hover{background:var(--bg);color:var(--text);}
+  .app{display:grid;grid-template-columns:250px 1fr;min-height:100vh;}
+  @media (max-width:860px){.app{grid-template-columns:1fr;}}
 
-  main{padding:28px 0 60px;}
-  .page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:24px;flex-wrap:wrap;}
-  .page-head h1{font-size:24px;font-weight:700;margin:0 0 4px;}
-  .page-head p{margin:0;color:var(--text-muted);font-size:14px;}
-  .badge-date{font-size:12.5px;color:var(--text-muted);background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:20px;}
+  /* ---------- Sidebar ---------- */
+  aside{
+    background:linear-gradient(180deg,var(--sidebar) 0%, #150C33 100%);
+    color:#E6E1FF;padding:26px 18px;position:sticky;top:0;height:100vh;overflow-y:auto;
+  }
+  @media (max-width:860px){aside{position:relative;height:auto;}}
+  .logo{display:flex;align-items:center;gap:10px;padding:0 8px 24px;margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .logo .mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--violet),var(--coral));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;}
+  .logo .name{font-size:14.5px;font-weight:700;line-height:1.25;}
+  .logo .sub{font-size:11px;color:#A79FD6;font-weight:500;}
+  nav.side-nav{display:flex;flex-direction:column;gap:3px;}
+  nav.side-nav button{
+    display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;border:none;background:transparent;
+    color:#C9C2EE;font-size:13.5px;font-weight:500;cursor:pointer;text-align:left;width:100%;transition:background .15s,color .15s;
+  }
+  nav.side-nav button .ic{width:22px;text-align:center;font-size:15px;}
+  nav.side-nav button:hover{background:rgba(255,255,255,0.06);color:#fff;}
+  nav.side-nav button.active{background:var(--sidebar-hi);color:#fff;box-shadow:inset 3px 0 0 var(--coral);}
+  .side-foot{margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.08);font-size:11.5px;color:#8D84BC;line-height:1.6;}
+
+  /* ---------- Main ---------- */
+  main{padding:30px 34px 60px;max-width:1280px;}
+  @media (max-width:640px){main{padding:22px 18px 50px;}}
+  .page{display:none;animation:fade .25s ease;}
+  .page.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+  .page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:22px;flex-wrap:wrap;}
+  .page-head h1{font-size:23px;font-weight:800;margin-bottom:4px;}
+  .page-head p{margin:0;color:var(--muted);font-size:13.5px;}
+  .pill-badge{font-size:12px;font-weight:600;color:var(--violet);background:var(--violet-soft);padding:6px 14px;border-radius:20px;}
 
   /* KPI cards */
-  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
   @media (max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
-  .kpi-card{
-    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-    padding:18px 20px;box-shadow:var(--shadow);
-  }
-  .kpi-card .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-  .kpi-card .icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;}
-  .kpi-card .val{font-size:26px;font-weight:800;line-height:1.1;}
-  .kpi-card .lbl{font-size:12.5px;color:var(--text-muted);margin-top:4px;}
-  .kpi-card .delta{font-size:12px;font-weight:600;padding:2px 8px;border-radius:12px;}
-  .delta.good{color:var(--green);background:var(--green-soft);}
-  .delta.warn{color:var(--amber);background:var(--amber-soft);}
+  .kpi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);transition:transform .15s, box-shadow .15s;}
+  .kpi-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,17,64,0.1);}
+  .kpi-card .icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:12px;}
+  .kpi-card .val{font-size:25px;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;}
+  .kpi-card .lbl{font-size:12.5px;color:var(--muted);margin-top:3px;}
+  .kpi-card .trend{display:inline-block;margin-top:9px;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:12px;}
+  .trend.good{color:var(--green);background:var(--green-soft);}
+  .trend.warn{color:var(--amber);background:var(--amber-soft);}
+  .trend.bad{color:var(--red);background:var(--red-soft);}
 
-  /* Section card */
-  .section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin-bottom:20px;}
-  .section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
-  .section-head h2{font-size:16px;font-weight:700;margin:0;}
-  .section-head p.desc{font-size:13px;color:var(--text-muted);margin:2px 0 0;}
-  .grid-2{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;}
+  /* Section / chart card */
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;margin-bottom:20px;}
+  .card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
+  .card-head h2{font-size:15.5px;font-weight:700;}
+  .card-head p.desc{font-size:12.5px;color:var(--muted);margin:2px 0 0;}
+  .grid-2{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:start;}
   @media (max-width:900px){.grid-2{grid-template-columns:1fr;}}
-  canvas{max-height:280px;}
+  .chart-wrap{position:relative;height:280px;width:100%;}
 
-  /* Legend chips */
-  .legend-row{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--text-muted);margin-bottom:14px;}
+  .toggle-group{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:10px;}
+  .toggle-group button{
+    font-size:12px;font-weight:600;padding:6px 12px;border:none;background:transparent;color:var(--muted);
+    border-radius:7px;cursor:pointer;transition:background .15s,color .15s;
+  }
+  .toggle-group button.active{background:var(--card);color:var(--violet);box-shadow:0 1px 3px rgba(27,17,64,0.12);}
+
+  .legend-row{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:12px;}
   .legend-row span{display:inline-flex;align-items:center;gap:6px;}
   .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
 
   /* Table */
   .table-controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;align-items:center;}
-  .chip{
-    font-size:13px;padding:7px 14px;border:1px solid var(--border);background:#fff;color:var(--text-muted);
-    cursor:pointer;border-radius:8px;font-family:'Inter',sans-serif;font-weight:500;
-  }
-  .chip.active{background:var(--primary);border-color:var(--primary);color:#fff;}
-  .search-input{
-    margin-left:auto;font-size:13px;padding:8px 14px;border:1px solid var(--border);background:#fff;
-    color:var(--text);border-radius:8px;font-family:'Inter',sans-serif;min-width:200px;
-  }
+  .chip{font-size:12.5px;font-weight:600;padding:7px 14px;border:1px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;border-radius:20px;}
+  .chip.active{background:var(--violet);border-color:var(--violet);color:#fff;}
+  .search-input{margin-left:auto;font-size:13px;padding:8px 14px;border:1px solid var(--border);background:#fff;color:var(--text);border-radius:20px;min-width:200px;}
+  .search-input:focus{outline:2px solid var(--violet);}
   .table-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:10px;}
   table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:760px;}
-  thead th{
-    text-align:left;padding:11px 14px;background:#FAFBFC;color:var(--text-muted);
-    font-weight:600;font-size:12px;white-space:nowrap;border-bottom:1px solid var(--border);
-  }
+  thead th{text-align:left;padding:11px 14px;background:#FAF9FE;color:var(--muted);font-weight:700;font-size:11.5px;white-space:nowrap;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;}
+  thead th:hover{color:var(--violet);}
+  thead th .arrow{opacity:0.4;margin-left:3px;font-size:10px;}
   tbody td{padding:10px 14px;border-top:1px solid var(--border);white-space:nowrap;}
-  tbody tr:hover{background:#FAFBFC;}
-  .pill{font-size:11.5px;padding:3px 10px;border-radius:20px;font-weight:600;display:inline-block;}
+  tbody tr:hover{background:#FAF9FE;}
+  .pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;}
   .pill.pos{background:var(--green-soft);color:var(--green);}
   .pill.neg{background:var(--red-soft);color:var(--red);}
-  .pill.neu{background:var(--amber-soft);color:var(--amber);}
-  .table-caption{font-size:12.5px;color:var(--text-muted);margin-top:10px;}
+  .pill.neu{background:var(--amber-soft);color:#946200;}
+  .table-caption{font-size:12px;color:var(--muted);margin-top:10px;}
 
-  /* Recommendation cards */
+  /* Recommendation / decision cards */
   .rec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
   @media (max-width:800px){.rec-grid{grid-template-columns:1fr;}}
-  .rec-card{border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
-  .rec-card .area{font-size:13px;font-weight:700;color:var(--primary);margin-bottom:8px;}
-  .rec-card .insight{font-size:13px;color:var(--text-muted);margin-bottom:8px;line-height:1.5;}
-  .rec-card .rec{font-size:13.5px;line-height:1.55;}
-  .rec-card .status{display:inline-block;margin-top:10px;font-size:11px;font-weight:600;color:var(--amber);background:var(--amber-soft);padding:3px 10px;border-radius:12px;}
+  .rec-card{border:1px solid var(--border);border-radius:12px;padding:17px 19px;border-top:3px solid var(--violet);}
+  .rec-card:nth-child(2){border-top-color:var(--coral);}
+  .rec-card:nth-child(3){border-top-color:var(--teal);}
+  .rec-card:nth-child(4){border-top-color:var(--amber);}
+  .rec-card:nth-child(5){border-top-color:var(--green);}
+  .rec-card .area{font-size:13.5px;font-weight:700;margin-bottom:8px;}
+  .rec-card .insight{font-size:12.5px;color:var(--muted);margin-bottom:8px;line-height:1.55;}
+  .rec-card .rec{font-size:13px;line-height:1.55;}
+  .rec-card .status{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;color:var(--amber);background:var(--amber-soft);padding:3px 10px;border-radius:12px;}
 
-  footer{padding:20px 0 50px;text-align:center;font-size:12.5px;color:var(--text-muted);}
+  footer{text-align:center;font-size:12px;color:var(--muted);padding:20px 0 10px;}
 </style>
 </head>
 <body>
 
-<header class="top">
-  <div class="wrap">
-    <div class="logo"><span class="mark">AH</span> Abdi Creator Hub</div>
-    <nav class="tabs">
-      <a href="#ringkasan">Ringkasan</a>
-      <a href="#format">Format</a>
-      <a href="#creator">Creator</a>
-      <a href="#konten">Konten</a>
-      <a href="#feedback">Feedback</a>
-      <a href="#rekomendasi">Rekomendasi</a>
-      <a href="#keputusan">Keputusan</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <div class="wrap">
-
-    <div class="page-head" id="ringkasan">
+<div class="app">
+  <aside>
+    <div class="logo">
+      <div class="mark">AH</div>
       <div>
-        <h1>Dashboard Campaign — Book Creator Collaboration</h1>
-        <p>Ringkasan performa 9 creator dan 31 konten (Carousel &amp; Reels) pada pilot campaign.</p>
-      </div>
-      <div class="badge-date">Periode pilot · 9 creator · 31 konten</div>
-    </div>
-
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="top-row"><div class="icon" style="background:var(--primary-soft);color:var(--primary);">👁</div></div>
-        <div class="val">58.421</div>
-        <div class="lbl">Total Views</div>
-      </div>
-      <div class="kpi-card">
-        <div class="top-row"><div class="icon" style="background:var(--teal-soft);color:var(--teal);">💬</div></div>
-        <div class="val">2.838</div>
-        <div class="lbl">Total Engagement</div>
-      </div>
-      <div class="kpi-card">
-        <div class="top-row"><div class="icon" style="background:var(--green-soft);color:var(--green);">📈</div><span class="delta good">8/9 di atas target</span></div>
-        <div class="val">5,74%</div>
-        <div class="lbl">Rata-rata Engagement Rate</div>
-      </div>
-      <div class="kpi-card">
-        <div class="top-row"><div class="icon" style="background:var(--amber-soft);color:var(--amber);">⏱</div></div>
-        <div class="val">52,60%</div>
-        <div class="lbl">Rata-rata Retention Rate</div>
+        <div class="name">Abdi Creator Hub</div>
+        <div class="sub">Dashboard Campaign</div>
       </div>
     </div>
+    <nav class="side-nav" id="sideNav">
+      <button data-page="ringkasan" class="active"><span class="ic">🏠</span>Ringkasan</button>
+      <button data-page="format"><span class="ic">📐</span>Format</button>
+      <button data-page="creator"><span class="ic">⭐</span>Creator</button>
+      <button data-page="konten"><span class="ic">🗂️</span>Konten</button>
+      <button data-page="feedback"><span class="ic">💬</span>Feedback</button>
+      <button data-page="rekomendasi"><span class="ic">💡</span>Rekomendasi</button>
+      <button data-page="keputusan"><span class="ic">✅</span>Keputusan</button>
+    </nav>
+    <div class="side-foot">Pilot campaign · 9 creator · 31 konten (Carousel &amp; Reels)</div>
+  </aside>
 
-    <div class="kpi-grid">
-      <div class="kpi-card">
-        <div class="val">3,89 / 5</div>
-        <div class="lbl">Skor Brief (feedback creator)</div>
-      </div>
-      <div class="kpi-card">
-        <div class="val">4,00 / 5</div>
-        <div class="lbl">Skor Timeline</div>
-      </div>
-      <div class="kpi-card">
-        <div class="val">4,00 / 5</div>
-        <div class="lbl">Skor Komunikasi</div>
-      </div>
-      <div class="kpi-card">
-        <div class="val">5</div>
-        <div class="lbl">Rekomendasi &amp; Keputusan Pending</div>
-      </div>
-    </div>
+  <main>
 
-    <div class="section" id="format">
-      <div class="section-head">
-        <div>
-          <h2>Carousel vs Reels</h2>
-          <p class="desc">Carousel unggul di jangkauan (views), Reels unggul di engagement &amp; retention.</p>
+    <!-- RINGKASAN -->
+    <section class="page active" id="page-ringkasan">
+      <div class="page-head">
+        <div><h1>Ringkasan Campaign</h1><p>Performa 9 creator dan 31 konten pada pilot campaign Book Creator Collaboration.</p></div>
+        <div class="pill-badge">8/9 creator di atas target ER</div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="icon" style="background:var(--violet-soft);color:var(--violet);">👁</div>
+          <div class="val">58.421</div><div class="lbl">Total Views</div>
+          <span class="trend good">31 konten</span>
+        </div>
+        <div class="kpi-card">
+          <div class="icon" style="background:var(--coral-soft);color:var(--coral);">💬</div>
+          <div class="val">2.838</div><div class="lbl">Total Engagement</div>
+          <span class="trend good">Like+Comment+Repost+Send+Save</span>
+        </div>
+        <div class="kpi-card">
+          <div class="icon" style="background:var(--teal-soft);color:var(--teal);">📈</div>
+          <div class="val">5,74%</div><div class="lbl">Rata-rata Engagement Rate</div>
+          <span class="trend good">Target: 3%</span>
+        </div>
+        <div class="kpi-card">
+          <div class="icon" style="background:var(--amber-soft);color:var(--amber);">⏱</div>
+          <div class="val">52,60%</div><div class="lbl">Rata-rata Retention Rate</div>
+          <span class="trend good">Viewers ÷ Views</span>
         </div>
       </div>
-      <div class="grid-2">
-        <div>
-          <div class="legend-row"><span><span class="dot" style="background:#4F46E5;"></span>Rata-rata Views</span></div>
-          <canvas id="formatViewsChart"></canvas>
-        </div>
-        <div>
-          <div class="legend-row"><span><span class="dot" style="background:#0EA5A5;"></span>Engagement Rate</span><span><span class="dot" style="background:#D97706;"></span>Retention Rate</span></div>
-          <canvas id="formatErChart"></canvas>
-        </div>
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="val">3,89/5</div><div class="lbl">Skor Brief</div><span class="trend warn">Cukup</span></div>
+        <div class="kpi-card"><div class="val">4,00/5</div><div class="lbl">Skor Timeline</div><span class="trend good">Positif</span></div>
+        <div class="kpi-card"><div class="val">4,00/5</div><div class="lbl">Skor Komunikasi</div><span class="trend good">Positif</span></div>
+        <div class="kpi-card"><div class="val">5</div><div class="lbl">Rekomendasi &amp; Keputusan Pending</div><span class="trend warn">Menunggu review</span></div>
       </div>
-    </div>
 
-    <div class="section" id="creator">
-      <div class="section-head">
-        <div>
-          <h2>Performa per Creator</h2>
-          <p class="desc">Diurutkan dari Engagement Rate rata-rata tertinggi.</p>
+      <div class="card">
+        <div class="card-head">
+          <div><h2>Sekilas performa format</h2><p class="desc">Carousel unggul di views, Reels unggul di ER &amp; retention.</p></div>
+        </div>
+        <div class="grid-2">
+          <div class="chart-wrap"><canvas id="miniFormatChart"></canvas></div>
+          <div class="chart-wrap"><canvas id="miniCreatorChart"></canvas></div>
         </div>
       </div>
-      <div class="grid-2">
-        <canvas id="creatorErChart"></canvas>
-        <div>
-          <div class="table-scroll">
-            <table>
-              <thead><tr><th>Creator</th><th>Konten</th><th>Views</th><th>Avg ER</th><th>Avg Retention</th></tr></thead>
-              <tbody id="creatorTableBody"></tbody>
-            </table>
+    </section>
+
+    <!-- FORMAT -->
+    <section class="page" id="page-format">
+      <div class="page-head"><div><h1>Carousel vs Reels</h1><p>Perbandingan performa dua format konten pada pilot campaign.</p></div></div>
+      <div class="card">
+        <div class="grid-2">
+          <div>
+            <div class="card-head"><h2>Rata-rata Views per Format</h2></div>
+            <div class="legend-row"><span><span class="dot" style="background:var(--violet);"></span>Rata-rata Views</span></div>
+            <div class="chart-wrap"><canvas id="formatViewsChart"></canvas></div>
+          </div>
+          <div>
+            <div class="card-head"><h2>Engagement Rate vs Retention Rate</h2></div>
+            <div class="legend-row"><span><span class="dot" style="background:var(--teal);"></span>Engagement Rate</span><span><span class="dot" style="background:var(--amber);"></span>Retention Rate</span></div>
+            <div class="chart-wrap"><canvas id="formatErChart"></canvas></div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="section" id="konten">
-      <div class="section-head">
-        <div>
-          <h2>Detail Konten</h2>
-          <p class="desc">31 konten — filter per format atau cari nama creator.</p>
+      <div class="card">
+        <div class="card-head"><h2>Detail per sub-format</h2><p class="desc">Carousel 1/2 dan Reels 1/2 — performa tiap batch konten.</p></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Sub-format</th><th>Jumlah konten</th><th>Total Views</th><th>Avg Views</th><th>Avg ER</th><th>Avg Retention</th></tr></thead>
+            <tbody id="subFormatBody"></tbody>
+          </table>
         </div>
       </div>
-      <div class="table-controls">
-        <button class="chip active" data-filter="all">Semua format</button>
-        <button class="chip" data-filter="Carousel">Carousel</button>
-        <button class="chip" data-filter="Reels">Reels</button>
-        <input class="search-input" id="searchInput" type="text" placeholder="Cari creator…">
-      </div>
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr><th>Creator</th><th>Content</th><th>Format</th><th>Views</th><th>Viewers</th><th>Total Eng.</th><th>ER</th><th>Retention</th><th>Kategori</th></tr>
-          </thead>
-          <tbody id="perfTableBody"></tbody>
-        </table>
-      </div>
-      <p class="table-caption" id="perfCount"></p>
-    </div>
+    </section>
 
-    <div class="section" id="feedback">
-      <div class="section-head">
-        <div>
-          <h2>Suara Creator</h2>
-          <p class="desc">Rata-rata skor 1–5 dari 9 creator yang mengisi survei pasca-campaign.</p>
+    <!-- CREATOR -->
+    <section class="page" id="page-creator">
+      <div class="page-head"><div><h1>Performa per Creator</h1><p>Diurutkan dari metrik yang dipilih.</p></div></div>
+      <div class="card">
+        <div class="card-head">
+          <h2>Perbandingan creator</h2>
+          <div class="toggle-group" id="creatorMetricToggle">
+            <button data-metric="er" class="active">ER</button>
+            <button data-metric="views">Views</button>
+            <button data-metric="ret">Retention</button>
+          </div>
+        </div>
+        <div class="chart-wrap" style="height:320px;"><canvas id="creatorChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Tabel creator</h2><p class="desc">Klik header kolom untuk mengurutkan.</p></div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th data-key="creator">Creator <span class="arrow">↕</span></th>
+                <th data-key="count">Konten <span class="arrow">↕</span></th>
+                <th data-key="views">Total Views <span class="arrow">↕</span></th>
+                <th data-key="er">Avg ER <span class="arrow">↕</span></th>
+                <th data-key="ret">Avg Retention <span class="arrow">↕</span></th>
+              </tr>
+            </thead>
+            <tbody id="creatorTableBody"></tbody>
+          </table>
         </div>
       </div>
-      <div class="grid-2">
-        <canvas id="feedbackChart"></canvas>
-        <div id="feedbackNotes"></div>
-      </div>
-    </div>
+    </section>
 
-    <div class="section" id="rekomendasi">
-      <div class="section-head">
-        <div>
-          <h2>Rekomendasi</h2>
-          <p class="desc">Evidence dan insight per area, menunggu keputusan final tim.</p>
+    <!-- KONTEN -->
+    <section class="page" id="page-konten">
+      <div class="page-head"><div><h1>Detail Konten</h1><p>31 konten — filter per format atau cari nama creator.</p></div></div>
+      <div class="card">
+        <div class="table-controls">
+          <button class="chip active" data-filter="all">Semua format</button>
+          <button class="chip" data-filter="Carousel">Carousel</button>
+          <button class="chip" data-filter="Reels">Reels</button>
+          <input class="search-input" id="searchInput" type="text" placeholder="Cari creator…">
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th>Creator</th><th>Content</th><th>Format</th><th>Views</th><th>Viewers</th><th>Total Eng.</th><th>ER</th><th>Retention</th><th>Kategori</th></tr>
+            </thead>
+            <tbody id="perfTableBody"></tbody>
+          </table>
+        </div>
+        <p class="table-caption" id="perfCount"></p>
+      </div>
+    </section>
+
+    <!-- FEEDBACK -->
+    <section class="page" id="page-feedback">
+      <div class="page-head"><div><h1>Suara Creator</h1><p>Rata-rata skor 1–5 dari 9 creator yang mengisi survei pasca-campaign.</p></div></div>
+      <div class="card">
+        <div class="grid-2">
+          <div class="chart-wrap" style="height:260px;"><canvas id="feedbackChart"></canvas></div>
+          <div id="feedbackNotes"></div>
         </div>
       </div>
+    </section>
+
+    <!-- REKOMENDASI -->
+    <section class="page" id="page-rekomendasi">
+      <div class="page-head"><div><h1>Rekomendasi</h1><p>Evidence dan insight per area, menunggu keputusan final tim.</p></div></div>
       <div class="rec-grid" id="recGrid"></div>
-    </div>
+    </section>
 
-    <div class="section" id="keputusan">
-      <div class="section-head">
-        <div>
-          <h2>Log Keputusan Campaign</h2>
-          <p class="desc">Keputusan tercatat lengkap dengan PIC dan KPI lanjutan — lima keputusan masih berstatus Pending.</p>
+    <!-- KEPUTUSAN -->
+    <section class="page" id="page-keputusan">
+      <div class="page-head"><div><h1>Log Keputusan Campaign</h1><p>Lima keputusan masih berstatus Pending.</p></div></div>
+      <div class="card">
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Area</th><th>Keputusan Final</th><th>PIC</th><th>Status</th><th>Follow-up KPI</th></tr></thead>
+            <tbody id="decisionTableBody"></tbody>
+          </table>
         </div>
       </div>
-      <div class="table-scroll">
-        <table>
-          <thead><tr><th>Area</th><th>Keputusan Final</th><th>PIC</th><th>Status</th><th>Follow-up KPI</th></tr></thead>
-          <tbody id="decisionTableBody"></tbody>
-        </table>
-      </div>
-    </div>
+    </section>
 
-  </div>
-</main>
-
-<footer>Abdi Creator Hub — Dashboard Campaign · data pilot: 9 creator, 31 konten</footer>
+    <footer>Abdi Creator Hub — Dashboard Campaign · data pilot: 9 creator, 31 konten</footer>
+  </main>
+</div>
 
 <script>
 const fmtInt = n => new Intl.NumberFormat('id-ID').format(Math.round(n));
 const fmtPct = n => (n*100).toLocaleString('id-ID',{minimumFractionDigits:1,maximumFractionDigits:1}) + '%';
 const fmt1 = n => n.toLocaleString('id-ID',{minimumFractionDigits:2,maximumFractionDigits:2});
+const PALETTE = ['#7C3AED','#FB7185','#0EA5A5','#F59E0B','#10B981','#6366F1','#F97316','#14B8A6','#EC4899'];
 
+/* ---------- DATA ---------- */
 const formatAgg = [
   {format:'Carousel', avgViews:2507.93, avgER:0.04232, avgRet:0.39258},
   {format:'Reels', avgViews:1300.13, avgER:0.05990, avgRet:0.65116},
 ];
-
+const subFormat = [
+  {name:'Carousel 1', count:8, totalViews:14604, avgViews:1825.5, avgER:0.054643, avgRet:0.355626},
+  {name:'Carousel 2', count:7, totalViews:23015, avgViews:3287.857, avgER:0.034499, avgRet:0.434821},
+  {name:'Reels 1', count:9, totalViews:11641, avgViews:1293.444, avgER:0.059187, avgRet:0.604102},
+  {name:'Reels 2', count:7, totalViews:9161, avgViews:1308.714, avgER:0.060801, avgRet:0.711662},
+];
 const creatorInsights = [
   {creator:'Irmanaeni', count:3, views:5268, er:0.07137, ret:0.49602},
   {creator:'Diarybaca_fany', count:4, views:8064, er:0.05655, ret:0.60473},
@@ -321,7 +352,6 @@ const creatorInsights = [
   {creator:'Ranyzakyaaa', count:3, views:7180, er:0.03273, ret:0.38657},
   {creator:'Tulisandynana07_', count:2, views:4462, er:0.02824, ret:0.64801},
 ];
-
 const campaignPerformance = [
   ['Mrmusy_afak','Carousel 1','Carousel',2946,1119,105,0.035642,'Di Atas Target',0.379837],
   ['Mrmusy_afak','Reels 1','Reels',1151,709,69,0.059948,'Di Atas Target',0.615986],
@@ -355,7 +385,6 @@ const campaignPerformance = [
   ['Tulisandynana07_','Reels 1','Reels',1968,1247,55,0.027947,'Perlu Ditingkatkan',0.633638],
   ['Tulisandynana07_','Reels 2','Reels',2494,1652,71,0.028468,'Perlu Ditingkatkan',0.662390],
 ];
-
 const feedbackSummary = [
   {dim:'Brief mudah dipahami', avg:3.89, interp:'Cukup', signal:'Review & optimalkan', tag:'neu'},
   {dim:'Brief campaign mudah dipahami & diikuti', avg:3.78, interp:'Cukup', signal:'Review & optimalkan', tag:'neu'},
@@ -363,7 +392,6 @@ const feedbackSummary = [
   {dim:'Komunikasi berjalan efektif', avg:4.00, interp:'Positif', signal:'Pertahankan', tag:'pos'},
   {dim:'Informasi buku cukup membantu', avg:4.00, interp:'Positif', signal:'Pertahankan', tag:'pos'},
 ];
-
 const recommendations = [
   {area:'Content Format', insight:'Carousel memiliki average views lebih tinggi pada pilot.', rec:'Prioritaskan format dengan performa lebih tinggi untuk pengujian berikutnya dan validasi kembali bersama ER serta retention.'},
   {area:'Creator Performance', insight:'Creator dengan average ER tertinggi menjadi salah satu evidence performa.', rec:'Gunakan ER bersama views, retention, content fit, dan feedback; jangan memilih creator berdasarkan satu metrik saja.'},
@@ -371,7 +399,6 @@ const recommendations = [
   {area:'Timeline', insight:'Skor timeline 4,00/5 — positif.', rec:'Tindak lanjuti Action Signal dari Feedback Summary untuk campaign berikutnya.'},
   {area:'Communication', insight:'Skor komunikasi 4,00/5 — positif.', rec:'Tindak lanjuti Action Signal dari Feedback Summary untuk campaign berikutnya.'},
 ];
-
 const decisionLog = [
   {area:'Content Format', decision:'Mempertahankan komposisi 1 Carousel dan 1 Reels untuk masing-masing buku dan mengoptimalkan pendekatan konten berdasarkan performa masing-masing format', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Rata-rata Views; Engagement Rate'},
   {area:'Creator Selection', decision:'Menggunakan data performa creator sebagai salah satu pertimbangan dalam pemilihan creator pada campaign berikutnya', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Engagement Rate Creator; Retention Rate'},
@@ -380,29 +407,62 @@ const decisionLog = [
   {area:'Communication Workflow', decision:'Mempertahankan komunikasi yang responsif dan memperjelas alur koordinasi campaign', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Skor Komunikasi ≥ 4/5'},
 ];
 
-/* Creator table */
-const creatorTableBody = document.getElementById('creatorTableBody');
-[...creatorInsights].sort((a,b)=>b.er-a.er).forEach(c=>{
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td>${c.creator}</td><td>${c.count}</td><td>${fmtInt(c.views)}</td><td>${fmtPct(c.er)}</td><td>${fmtPct(c.ret)}</td>`;
-  creatorTableBody.appendChild(tr);
+/* ---------- SIDEBAR NAV (SPA switch) ---------- */
+document.querySelectorAll('#sideNav button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#sideNav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('page-'+btn.dataset.page).classList.add('active');
+    window.scrollTo({top:0,behavior:'instant'});
+  });
 });
 
-/* Performance table */
+/* ---------- Sub-format table ---------- */
+const subFormatBody = document.getElementById('subFormatBody');
+subFormat.forEach(s=>{
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td>${s.name}</td><td>${s.count}</td><td>${fmtInt(s.totalViews)}</td><td>${fmtInt(s.avgViews)}</td><td>${fmtPct(s.avgER)}</td><td>${fmtPct(s.avgRet)}</td>`;
+  subFormatBody.appendChild(tr);
+});
+
+/* ---------- Creator table (sortable) ---------- */
+const creatorTableBody = document.getElementById('creatorTableBody');
+let creatorSortKey = 'er', creatorSortDir = -1;
+function renderCreatorTable(){
+  const rows = [...creatorInsights].sort((a,b)=> (a[creatorSortKey] > b[creatorSortKey] ? 1 : -1) * creatorSortDir);
+  creatorTableBody.innerHTML='';
+  rows.forEach(c=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${c.creator}</td><td>${c.count}</td><td>${fmtInt(c.views)}</td><td>${fmtPct(c.er)}</td><td>${fmtPct(c.ret)}</td>`;
+    creatorTableBody.appendChild(tr);
+  });
+}
+document.querySelectorAll('#page-creator thead th[data-key]').forEach(th=>{
+  th.addEventListener('click', ()=>{
+    const key = th.dataset.key;
+    creatorSortDir = (creatorSortKey===key) ? -creatorSortDir : -1;
+    creatorSortKey = key;
+    renderCreatorTable();
+  });
+});
+renderCreatorTable();
+
+/* ---------- Performance table (filter + search) ---------- */
 const perfTableBody = document.getElementById('perfTableBody');
 const perfCount = document.getElementById('perfCount');
-let currentFilter = 'all', currentSearch = '';
+let currentFilter='all', currentSearch='';
 function renderPerfTable(){
-  perfTableBody.innerHTML = '';
+  perfTableBody.innerHTML='';
   const rows = campaignPerformance.filter(r=>{
-    const matchesFormat = currentFilter==='all' || r[2]===currentFilter;
-    const matchesSearch = r[0].toLowerCase().includes(currentSearch.toLowerCase());
-    return matchesFormat && matchesSearch;
+    const mF = currentFilter==='all' || r[2]===currentFilter;
+    const mS = r[0].toLowerCase().includes(currentSearch.toLowerCase());
+    return mF && mS;
   });
   rows.forEach(r=>{
-    const [creator,content,format,views,viewers,eng,er,cat,ret] = r;
+    const [creator,content,format,views,viewers,eng,er,cat,ret]=r;
     const pillClass = cat==='Di Atas Target' ? 'pos':'neg';
-    const tr = document.createElement('tr');
+    const tr=document.createElement('tr');
     tr.innerHTML = `<td>${creator}</td><td>${content}</td><td>${format}</td><td>${fmtInt(views)}</td><td>${fmtInt(viewers)}</td><td>${fmtInt(eng)}</td><td>${fmtPct(er)}</td><td>${fmtPct(ret)}</td><td><span class="pill ${pillClass}">${cat}</span></td>`;
     perfTableBody.appendChild(tr);
   });
@@ -422,73 +482,89 @@ document.getElementById('searchInput').addEventListener('input', e=>{
   renderPerfTable();
 });
 
-/* Feedback notes */
+/* ---------- Feedback notes ---------- */
 const feedbackNotes = document.getElementById('feedbackNotes');
 feedbackSummary.forEach(f=>{
   const el = document.createElement('div');
-  el.style.cssText = 'padding:12px 0;border-top:1px solid var(--border);font-size:13.5px;';
+  el.style.cssText='padding:12px 0;border-top:1px solid var(--border);font-size:13.5px;';
   const pillClass = f.tag==='pos' ? 'pos':'neu';
-  el.innerHTML = `<span class="pill ${pillClass}">${f.interp}</span> <strong>${f.dim}</strong> — ${fmt1(f.avg)}/5<div style="color:var(--text-muted);font-size:12.5px;margin-top:4px;">${f.signal}</div>`;
+  el.innerHTML = `<span class="pill ${pillClass}">${f.interp}</span> <strong>${f.dim}</strong> — ${fmt1(f.avg)}/5<div style="color:var(--muted);font-size:12.5px;margin-top:4px;">${f.signal}</div>`;
   feedbackNotes.appendChild(el);
 });
-feedbackNotes.firstChild.style.borderTop = 'none';
+if(feedbackNotes.firstChild) feedbackNotes.firstChild.style.borderTop='none';
 
-/* Recommendation cards */
+/* ---------- Recommendation cards ---------- */
 const recGrid = document.getElementById('recGrid');
 recommendations.forEach(r=>{
   const el = document.createElement('div');
-  el.className = 'rec-card';
+  el.className='rec-card';
   el.innerHTML = `<div class="area">${r.area}</div><div class="insight">${r.insight}</div><div class="rec">${r.rec}</div><span class="status">Open</span>`;
   recGrid.appendChild(el);
 });
 
-/* Decision table */
+/* ---------- Decision table ---------- */
 const decisionTableBody = document.getElementById('decisionTableBody');
 decisionLog.forEach(d=>{
-  const tr = document.createElement('tr');
+  const tr=document.createElement('tr');
   tr.innerHTML = `<td>${d.area}</td><td style="white-space:normal;min-width:260px;">${d.decision}</td><td>${d.pic}</td><td><span class="pill neu">${d.status}</span></td><td style="white-space:normal;min-width:180px;">${d.kpi}</td>`;
   decisionTableBody.appendChild(tr);
 });
 
-/* Charts */
+/* ---------- CHARTS ---------- */
 Chart.defaults.font.family = "'Inter',sans-serif";
-Chart.defaults.color = '#6B7280';
+Chart.defaults.color = '#716C87';
+
+new Chart(document.getElementById('miniFormatChart'),{
+  type:'bar',
+  data:{ labels:formatAgg.map(f=>f.format), datasets:[{label:'Avg Views', data:formatAgg.map(f=>f.avgViews), backgroundColor:['#7C3AED','#FB7185'], borderRadius:8, maxBarThickness:60}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Rata-rata Views',font:{size:12,weight:600},color:'#1F1B33',align:'start'}},scales:{y:{beginAtZero:true,grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
+});
+new Chart(document.getElementById('miniCreatorChart'),{
+  type:'bar',
+  data:{ labels:[...creatorInsights].sort((a,b)=>b.er-a.er).slice(0,5).map(c=>c.creator), datasets:[{data:[...creatorInsights].sort((a,b)=>b.er-a.er).slice(0,5).map(c=>+(c.er*100).toFixed(2)), backgroundColor:PALETTE, borderRadius:8}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Top 5 Creator by ER (%)',font:{size:12,weight:600},color:'#1F1B33',align:'start'}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFFA'}},y:{grid:{display:false}}}}
+});
 
 new Chart(document.getElementById('formatViewsChart'),{
   type:'bar',
-  data:{ labels: formatAgg.map(f=>f.format), datasets:[{ data: formatAgg.map(f=>f.avgViews), backgroundColor:'#4F46E5', borderRadius:6, maxBarThickness:70 }]},
-  options:{ responsive:true, plugins:{legend:{display:false}}, scales:{ y:{beginAtZero:true, grid:{color:'#EEF0F3'}}, x:{grid:{display:false}} } }
+  data:{labels:formatAgg.map(f=>f.format),datasets:[{data:formatAgg.map(f=>f.avgViews),backgroundColor:['#7C3AED','#FB7185'],borderRadius:8,maxBarThickness:70}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
 });
-
 new Chart(document.getElementById('formatErChart'),{
   type:'bar',
-  data:{
-    labels: formatAgg.map(f=>f.format),
-    datasets:[
-      {label:'ER', data: formatAgg.map(f=>+(f.avgER*100).toFixed(2)), backgroundColor:'#0EA5A5', borderRadius:6, maxBarThickness:46},
-      {label:'Retention', data: formatAgg.map(f=>+(f.avgRet*100).toFixed(2)), backgroundColor:'#D97706', borderRadius:6, maxBarThickness:46},
-    ]
-  },
-  options:{ responsive:true, plugins:{legend:{display:false}}, scales:{ y:{beginAtZero:true, ticks:{callback:v=>v+'%'}, grid:{color:'#EEF0F3'}}, x:{grid:{display:false}} } }
+  data:{labels:formatAgg.map(f=>f.format),datasets:[
+    {label:'ER',data:formatAgg.map(f=>+(f.avgER*100).toFixed(2)),backgroundColor:'#0EA5A5',borderRadius:8,maxBarThickness:46},
+    {label:'Retention',data:formatAgg.map(f=>+(f.avgRet*100).toFixed(2)),backgroundColor:'#F59E0B',borderRadius:8,maxBarThickness:46},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
 });
 
-const sortedCreators = [...creatorInsights].sort((a,b)=>b.er-a.er);
-new Chart(document.getElementById('creatorErChart'),{
-  type:'bar',
-  data:{
-    labels: sortedCreators.map(c=>c.creator),
-    datasets:[{ data: sortedCreators.map(c=>+(c.er*100).toFixed(2)), backgroundColor: sortedCreators.map(c=> c.er<0.03 ? '#DC2626' : '#4F46E5'), borderRadius:6 }]
-  },
-  options:{ indexAxis:'y', responsive:true, plugins:{legend:{display:false}}, scales:{ x:{beginAtZero:true, ticks:{callback:v=>v+'%'}, grid:{color:'#EEF0F3'}}, y:{grid:{display:false}} } }
+let creatorChartInstance;
+function drawCreatorChart(metric){
+  const sorted = [...creatorInsights].sort((a,b)=>b[metric]-a[metric]);
+  const isPct = metric==='er' || metric==='ret';
+  const data = sorted.map(c=> isPct ? +(c[metric]*100).toFixed(2) : c[metric]);
+  const ctx = document.getElementById('creatorChart');
+  if(creatorChartInstance) creatorChartInstance.destroy();
+  creatorChartInstance = new Chart(ctx,{
+    type:'bar',
+    data:{labels:sorted.map(c=>c.creator),datasets:[{data, backgroundColor:sorted.map((c,i)=> metric==='er' && c.er<0.03 ? '#EF4444' : PALETTE[i%PALETTE.length]), borderRadius:8}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{callback:v=> isPct ? v+'%' : fmtInt(v)},grid:{color:'#F1EFFA'}},y:{grid:{display:false}}}}
+  });
+}
+drawCreatorChart('er');
+document.querySelectorAll('#creatorMetricToggle button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#creatorMetricToggle button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    drawCreatorChart(btn.dataset.metric);
+  });
 });
 
 new Chart(document.getElementById('feedbackChart'),{
   type:'bar',
-  data:{
-    labels: feedbackSummary.map(f=>f.dim),
-    datasets:[{ data: feedbackSummary.map(f=>f.avg), backgroundColor: feedbackSummary.map(f=> f.tag==='pos' ? '#16A34A' : '#D97706'), borderRadius:6 }]
-  },
-  options:{ indexAxis:'y', responsive:true, plugins:{legend:{display:false}}, scales:{ x:{min:0,max:5, grid:{color:'#EEF0F3'}}, y:{grid:{display:false}, ticks:{autoSkip:false, font:{size:11}}} } }
+  data:{labels:feedbackSummary.map(f=>f.dim),datasets:[{data:feedbackSummary.map(f=>f.avg),backgroundColor:feedbackSummary.map(f=>f.tag==='pos'?'#10B981':'#F59E0B'),borderRadius:8}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{min:0,max:5,grid:{color:'#F1EFFA'}},y:{grid:{display:false},ticks:{autoSkip:false,font:{size:11}}}}}
 });
 </script>
 </body>
