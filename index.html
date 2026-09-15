@@ -512,6 +512,7 @@ const decisionLog = [
 ];
 
 /* ---------- SIDEBAR NAV (SPA switch) ---------- */
+window.__allCharts = window.__allCharts || [];
 document.querySelectorAll('#sideNav button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('#sideNav button').forEach(b=>b.classList.remove('active'));
@@ -519,6 +520,7 @@ document.querySelectorAll('#sideNav button').forEach(btn=>{
     btn.classList.add('active');
     document.getElementById('page-'+btn.dataset.page).classList.add('active');
     window.scrollTo({top:0,behavior:'instant'});
+    requestAnimationFrame(()=>{ window.__allCharts.forEach(c=>{ if(c){ try{ c.resize(); } catch(e){} } }); });
   });
 });
 
@@ -615,33 +617,34 @@ decisionLog.forEach(d=>{
 });
 
 /* ---------- CHARTS ---------- */
+window.__allCharts = window.__allCharts || [];
 Chart.defaults.font.family = "'Inter',sans-serif";
 Chart.defaults.color = '#716C87';
 
-new Chart(document.getElementById('miniFormatChart'),{
+window.__allCharts.push(new Chart(document.getElementById('miniFormatChart'),{
   type:'bar',
   data:{ labels:formatAgg.map(f=>f.format), datasets:[{label:'Avg Views', data:formatAgg.map(f=>f.avgViews), backgroundColor:['#7C3AED','#FB7185'], borderRadius:8, maxBarThickness:60}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Rata-rata Views',font:{size:12,weight:600},color:'#1F1B33',align:'start'}},scales:{y:{beginAtZero:true,grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
-});
-new Chart(document.getElementById('miniCreatorChart'),{
+}));
+window.__allCharts.push(new Chart(document.getElementById('miniCreatorChart'),{
   type:'bar',
   data:{ labels:[...creatorInsights].sort((a,b)=>b.er-a.er).slice(0,5).map(c=>c.creator), datasets:[{data:[...creatorInsights].sort((a,b)=>b.er-a.er).slice(0,5).map(c=>+(c.er*100).toFixed(2)), backgroundColor:PALETTE, borderRadius:8}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Top 5 Creator by ER (%)',font:{size:12,weight:600},color:'#1F1B33',align:'start'}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFFA'}},y:{grid:{display:false}}}}
-});
+}));
 
-new Chart(document.getElementById('formatViewsChart'),{
+window.__allCharts.push(new Chart(document.getElementById('formatViewsChart'),{
   type:'bar',
   data:{labels:formatAgg.map(f=>f.format),datasets:[{data:formatAgg.map(f=>f.avgViews),backgroundColor:['#7C3AED','#FB7185'],borderRadius:8,maxBarThickness:70}]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
-});
-new Chart(document.getElementById('formatErChart'),{
+}));
+window.__allCharts.push(new Chart(document.getElementById('formatErChart'),{
   type:'bar',
   data:{labels:formatAgg.map(f=>f.format),datasets:[
     {label:'ER',data:formatAgg.map(f=>+(f.avgER*100).toFixed(2)),backgroundColor:'#0EA5A5',borderRadius:8,maxBarThickness:46},
     {label:'Retention',data:formatAgg.map(f=>+(f.avgRet*100).toFixed(2)),backgroundColor:'#F59E0B',borderRadius:8,maxBarThickness:46},
   ]},
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
-});
+}));
 
 let creatorChartInstance;
 const creatorChartLegend = document.getElementById('creatorChartLegend');
@@ -666,6 +669,7 @@ function drawCreatorChart(metric){
     data:{labels:sorted.map(c=>c.creator),datasets:[{data, backgroundColor:sorted.map((c,i)=> metric==='er' && c.er<0.03 ? '#EF4444' : PALETTE[i%PALETTE.length]), borderRadius:8}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{callback:v=> isPct ? v+'%' : fmtInt(v)},grid:{color:'#F1EFFA'}},y:{grid:{display:false}}}}
   });
+  window.__allCharts.push(creatorChartInstance);
 }
 drawCreatorChart('er');
 document.querySelectorAll('#creatorMetricToggle button').forEach(btn=>{
@@ -683,11 +687,11 @@ document.querySelectorAll('#creatorMetricToggle button').forEach(btn=>{
   const total = campaignPerformance.length;
   const labels = Object.keys(counts);
   const colors = ['#10B981','#EF4444'];
-  new Chart(document.getElementById('categoryDonutChart'),{
+  window.__allCharts.push(new Chart(document.getElementById('categoryDonutChart'),{
     type:'doughnut',
     data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} konten`}}}}
-  });
+  }));
   const legend = document.getElementById('categoryLegend');
   labels.forEach((l,i)=>{
     const pct = ((counts[l]/total)*100).toFixed(1);
@@ -704,11 +708,11 @@ document.querySelectorAll('#creatorMetricToggle button').forEach(btn=>{
   const total = counts.Carousel + counts.Reels;
   const labels = Object.keys(counts);
   const colors = ['#7C3AED','#FB7185'];
-  new Chart(document.getElementById('formatShareDonutChart'),{
+  window.__allCharts.push(new Chart(document.getElementById('formatShareDonutChart'),{
     type:'doughnut',
     data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} konten`}}}}
-  });
+  }));
   const legend = document.getElementById('formatShareLegend');
   labels.forEach((l,i)=>{
     const pct = ((counts[l]/total)*100).toFixed(1);
@@ -726,11 +730,11 @@ document.querySelectorAll('#creatorMetricToggle button').forEach(btn=>{
   const labels = Object.keys(counts);
   const colorMap = {Positif:'#10B981', Cukup:'#F59E0B'};
   const colors = labels.map(l=>colorMap[l] || '#7C3AED');
-  new Chart(document.getElementById('feedbackDonutChart'),{
+  window.__allCharts.push(new Chart(document.getElementById('feedbackDonutChart'),{
     type:'doughnut',
     data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} dimensi`}}}}
-  });
+  }));
   const legend = document.getElementById('feedbackDonutLegend');
   labels.forEach((l,i)=>{
     const pct = ((counts[l]/total)*100).toFixed(1);
@@ -740,11 +744,11 @@ document.querySelectorAll('#creatorMetricToggle button').forEach(btn=>{
   });
 })();
 
-new Chart(document.getElementById('feedbackChart'),{
+window.__allCharts.push(new Chart(document.getElementById('feedbackChart'),{
   type:'bar',
   data:{labels:feedbackSummary.map(f=>f.dim),datasets:[{data:feedbackSummary.map(f=>f.avg),backgroundColor:feedbackSummary.map(f=>f.tag==='pos'?'#10B981':'#F59E0B'),borderRadius:8}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{min:0,max:5,grid:{color:'#F1EFFA'}},y:{grid:{display:false},ticks:{autoSkip:false,font:{size:11}}}}}
-});
+}));
 </script>
 </body>
 </html>
