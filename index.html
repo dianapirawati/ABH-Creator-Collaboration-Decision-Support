@@ -133,28 +133,46 @@
   .rec-card .rec{font-size:13px;line-height:1.55;}
   .rec-card .status{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;color:var(--amber);background:var(--amber-soft);padding:3px 10px;border-radius:12px;}
 
-
-  .about-card{padding:34px;max-width:980px;}
-  .about-kicker{font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--violet);margin-bottom:10px;}
-  .about-card h2{font-size:25px;line-height:1.25;margin-bottom:16px;}
-  .about-card p{font-size:14px;line-height:1.75;color:var(--muted);max-width:850px;}
-  .decision-callout{margin:22px 0;padding:18px 20px;border-radius:12px;background:linear-gradient(135deg,#F1EBFF,#E1F7F5);border:1px solid #DDD5F7;line-height:1.65;font-size:13.5px;}
-  .decision-callout strong{color:var(--violet);font-size:12px;text-transform:uppercase;letter-spacing:.8px;}
-  .profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;}
-  .profile-grid div{padding:16px;border:1px solid var(--border);border-radius:12px;background:#FBFAFE;}
-  .profile-grid span,.profile-grid small{display:block;color:var(--muted);font-size:11px;margin-bottom:5px;}
-  .profile-grid strong{font-size:13px;line-height:1.45;}
-  .interactive-score{margin-top:14px;padding:16px 18px;border-radius:12px;background:linear-gradient(135deg,#1B1140,#2C1E68);color:#fff;box-shadow:0 8px 20px rgba(27,17,64,.14);}
-  .interactive-score>span{display:block;color:#BFB6EA;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
-  .interactive-score>strong{font-family:'Plus Jakarta Sans';font-size:18px;display:block;margin-bottom:12px;}
-  .score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-  .score-grid div{background:rgba(255,255,255,.08);padding:10px;border-radius:9px;}
-  .score-grid b{display:block;font-size:16px;}
-  .score-grid small{color:#C9C2EE;font-size:10px;}
-  canvas{cursor:pointer;}
-  @media(max-width:700px){.profile-grid{grid-template-columns:1fr;}.about-card{padding:24px;}}
-
   footer{text-align:center;font-size:12px;color:var(--muted);padding:20px 0 10px;}
+
+  /* ---------- About / Pitch cover ---------- */
+  .about-hero{
+    background:linear-gradient(135deg,var(--sidebar) 0%,#3B1F8C 55%,var(--coral) 130%);
+    border-radius:20px;padding:40px 38px;color:#fff;margin-bottom:20px;position:relative;overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .about-hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.08);}
+  .about-hero::before{content:"";position:absolute;left:-40px;bottom:-70px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.06);}
+  .about-badge{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:rgba(255,255,255,0.16);color:#fff;padding:6px 14px;border-radius:20px;margin-bottom:14px;}
+  .about-hero h1{font-size:30px;font-weight:800;margin-bottom:14px;position:relative;}
+  .about-desc{font-size:14.5px;line-height:1.85;color:#EDE9FB;max-width:820px;position:relative;margin:0;}
+  .about-desc b{color:#fff;}
+
+  .flow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;}
+  @media (max-width:900px){.flow-grid{grid-template-columns:repeat(2,1fr);}}
+  .flow-step{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 14px;box-shadow:var(--shadow);text-align:center;position:relative;}
+  .flow-step .num{width:26px;height:26px;border-radius:50%;background:var(--violet-soft);color:var(--violet);font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+  .flow-step .title{font-size:13px;font-weight:700;margin-bottom:5px;}
+  .flow-step .sub{font-size:11.5px;color:var(--muted);line-height:1.45;}
+  .flow-step:nth-child(1) .num{background:var(--violet-soft);color:var(--violet);}
+  .flow-step:nth-child(2) .num{background:var(--coral-soft);color:var(--coral);}
+  .flow-step:nth-child(3) .num{background:var(--teal-soft);color:var(--teal);}
+  .flow-step:nth-child(4) .num{background:var(--amber-soft);color:#946200;}
+  .flow-step:nth-child(5) .num{background:var(--green-soft);color:var(--green);}
+
+  .author-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 26px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px 28px;}
+  @media (max-width:700px){.author-card{grid-template-columns:1fr;}}
+  .author-row .author-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--violet);margin-bottom:5px;}
+  .author-row .author-value{font-size:14px;font-weight:600;line-height:1.55;color:var(--text);}
+  .author-row .author-id{font-weight:500;color:var(--muted);}
+
+  /* ---------- Donut legend list ---------- */
+  .donut-legend{display:flex;flex-direction:column;gap:12px;justify-content:center;height:100%;}
+  .donut-legend .item{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;padding:9px 12px;border-radius:10px;background:var(--bg);}
+  .donut-legend .item .lbl{display:flex;align-items:center;gap:9px;font-weight:600;color:var(--text);}
+  .donut-legend .item .dot{width:11px;height:11px;border-radius:4px;display:inline-block;flex:none;}
+  .donut-legend .item .num{font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;}
+  .donut-legend .item .pct{font-size:11.5px;color:var(--muted);margin-left:6px;font-weight:500;}
 </style>
 </head>
 <body>
@@ -169,8 +187,8 @@
       </div>
     </div>
     <nav class="side-nav" id="sideNav">
-      <button data-page="ringkasan" class="active"><span class="ic">🏠</span>Ringkasan</button>
-       <button data-page="about"><span class="ic">ⓘ</span>About</button>
+      <button data-page="tentang" class="active"><span class="ic">📖</span>Tentang</button>
+      <button data-page="ringkasan"><span class="ic">🏠</span>Ringkasan</button>
       <button data-page="format"><span class="ic">📐</span>Format</button>
       <button data-page="creator"><span class="ic">⭐</span>Creator</button>
       <button data-page="konten"><span class="ic">🗂️</span>Konten</button>
@@ -183,25 +201,39 @@
 
   <main>
 
-    <!-- ABOUT -->
-    <section class="page" id="page-about">
-      <div class="page-head"><div><h1>About ABH</h1><p>Program context, strategic value, and decision-support capability.</p></div><div class="pill-badge">Buku Abdi · Pilot 2026</div></div>
-      <div class="card about-card">
-        <div class="about-kicker">ABDICREATORHUB</div>
-        <h2>Creator collaboration, measurable evidence, better campaign decisions.</h2>
-        <p>ABH is a creator collaboration program developed for Buku Abdi. It provides a structured pathway for working with book-content creators while preserving creator authenticity and generating measurable campaign evidence.</p>
-        <p>Barter is the collaboration mechanism; the strategic value lies in building a repeatable, measurable learning loop.</p>
-        <div class="decision-callout"><strong>Decision Support</strong><br>ABH also functions as a decision-support pathway by transforming campaign performance and creator feedback into structured evidence, actionable insight, and recommendations for subsequent campaign decisions. The final decision remains human-led by the marketing team.</div>
-        <div class="profile-grid">
-          <div><span>Created By</span><strong>Diana Putri Irawati (255288010)</strong></div>
-          <div><span>Programme</span><strong>Master's Programme in Marketing, Innovation and Technology</strong><small>Department of Business Administration · Polban</small></div>
-          <div><span>Supervised by</span><strong>Rivan Sutrisno, SE., MA., PhD.</strong></div>
-        </div>
+    <!-- TENTANG -->
+    <section class="page active" id="page-tentang">
+      <div class="about-hero">
+        <span class="about-badge">Creator Collaboration Program</span>
+        <h1>Abdi Creator Hub (ABH)</h1>
+        <p class="about-desc">
+          ABH is a creator collaboration program developed for Buku Abdi. It provides a structured pathway for working with book-content creators while preserving creator authenticity and generating measurable campaign evidence.
+          <br><br>
+          <b>Barter</b> is the collaboration mechanism; the strategic value lies in building a repeatable, measurable learning loop.
+          <br><br>
+          ABH also functions as a decision-support pathway by transforming campaign performance and creator feedback into structured evidence, actionable insight, and recommendations for subsequent campaign decisions. The final decision remains human-led by the marketing team.
+        </p>
+      </div>
+
+      <div class="card-head" style="margin-bottom:12px;"><h2>Alur Decision-Support ABH</h2><p class="desc">Dari mekanisme barter hingga keputusan akhir yang tetap human-led.</p></div>
+      <div class="flow-grid">
+        <div class="flow-step"><div class="num">1</div><div class="title">Barter</div><div class="sub">Mekanisme kolaborasi dengan creator</div></div>
+        <div class="flow-step"><div class="num">2</div><div class="title">Campaign Performance</div><div class="sub">Data views, engagement &amp; retention</div></div>
+        <div class="flow-step"><div class="num">3</div><div class="title">Structured Evidence</div><div class="sub">Data diolah menjadi bukti terukur</div></div>
+        <div class="flow-step"><div class="num">4</div><div class="title">Actionable Insight</div><div class="sub">Insight &amp; rekomendasi per area</div></div>
+        <div class="flow-step"><div class="num">5</div><div class="title">Human-led Decision</div><div class="sub">Keputusan akhir oleh tim marketing</div></div>
+      </div>
+
+      <div class="author-card">
+        <div class="author-row"><div class="author-label">Created By</div><div class="author-value">Diana Putri Irawati <span class="author-id">(255288010)</span></div></div>
+        <div class="author-row"><div class="author-label">Supervised By</div><div class="author-value">Rivan Sutrisno, SE., MA., PhD.</div></div>
+        <div class="author-row"><div class="author-label">Programme</div><div class="author-value">Master's Programme in Marketing, Innovation and Technology, Department of Business Administration</div></div>
+        <div class="author-row"><div class="author-label">Institution</div><div class="author-value">Politeknik Negeri Bandung (Polban)</div></div>
       </div>
     </section>
 
     <!-- RINGKASAN -->
-    <section class="page active" id="page-ringkasan">
+    <section class="page" id="page-ringkasan">
       <div class="page-head">
         <div><h1>Ringkasan Campaign</h1><p>Performa 9 creator dan 31 konten pada pilot campaign Book Creator Collaboration.</p></div>
         <div class="pill-badge">8/9 creator di atas target ER</div>
@@ -239,9 +271,20 @@
         <div class="card-head">
           <div><h2>Sekilas performa format</h2><p class="desc">Carousel unggul di views, Reels unggul di ER &amp; retention.</p></div>
         </div>
+        <div class="legend-row"><span><span class="dot" style="background:var(--violet);"></span>Carousel</span><span><span class="dot" style="background:var(--coral);"></span>Reels</span></div>
         <div class="grid-2">
           <div class="chart-wrap"><canvas id="miniFormatChart"></canvas></div>
           <div class="chart-wrap"><canvas id="miniCreatorChart"></canvas></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div><h2>Distribusi Kategori Konten</h2><p class="desc">Perbandingan konten yang mencapai target ER vs. yang perlu ditingkatkan, dari 31 konten.</p></div>
+        </div>
+        <div class="grid-2">
+          <div class="chart-wrap" style="height:220px;"><canvas id="categoryDonutChart"></canvas></div>
+          <div class="donut-legend" id="categoryLegend"></div>
         </div>
       </div>
     </section>
@@ -254,7 +297,7 @@
           <div>
             <div class="card-head"><h2>Rata-rata Views per Format</h2></div>
             <div class="legend-row"><span><span class="dot" style="background:var(--violet);"></span>Rata-rata Views</span></div>
-            <div class="chart-wrap"><canvas id="formatViewsChart"></canvas></div><div id="formatScore" class="interactive-score"><span>Selected format</span><strong>Carousel</strong><div class="score-grid"><div><b>2,507.93</b><small>Avg Views</small></div><div><b>4.23%</b><small>Avg ER</small></div><div><b>39.26%</b><small>Retention</small></div></div></div>
+            <div class="chart-wrap"><canvas id="formatViewsChart"></canvas></div>
           </div>
           <div>
             <div class="card-head"><h2>Engagement Rate vs Retention Rate</h2></div>
@@ -272,6 +315,16 @@
           </table>
         </div>
       </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div><h2>Distribusi Jumlah Konten per Format</h2><p class="desc">Proporsi 31 konten pilot berdasarkan format.</p></div>
+        </div>
+        <div class="grid-2">
+          <div class="chart-wrap" style="height:220px;"><canvas id="formatShareDonutChart"></canvas></div>
+          <div class="donut-legend" id="formatShareLegend"></div>
+        </div>
+      </div>
     </section>
 
     <!-- CREATOR -->
@@ -286,7 +339,8 @@
             <button data-metric="ret">Retention</button>
           </div>
         </div>
-        <div class="chart-wrap" style="height:320px;"><canvas id="creatorChart"></canvas></div><div id="creatorScore" class="interactive-score"><span>Selected creator</span><strong>Irmanaeni</strong><div class="score-grid"><div><b>5,268</b><small>Views</small></div><div><b>7.14%</b><small>Avg ER</small></div><div><b>49.60%</b><small>Retention</small></div></div></div>
+        <div class="legend-row" id="creatorChartLegend"><span><span class="dot" style="background:var(--red);"></span>ER di bawah 3% (perlu perhatian)</span><span><span class="dot" style="background:var(--violet);"></span>ER di atas target</span></div>
+        <div class="chart-wrap" style="height:320px;"><canvas id="creatorChart"></canvas></div>
       </div>
       <div class="card">
         <div class="card-head"><h2>Tabel creator</h2><p class="desc">Klik header kolom untuk mengurutkan.</p></div>
@@ -333,9 +387,20 @@
     <section class="page" id="page-feedback">
       <div class="page-head"><div><h1>Suara Creator</h1><p>Rata-rata skor 1–5 dari 9 creator yang mengisi survei pasca-campaign.</p></div></div>
       <div class="card">
+        <div class="legend-row"><span><span class="dot" style="background:var(--green);"></span>Positif</span><span><span class="dot" style="background:var(--amber);"></span>Cukup (perlu review)</span></div>
         <div class="grid-2">
           <div class="chart-wrap" style="height:260px;"><canvas id="feedbackChart"></canvas></div>
           <div id="feedbackNotes"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div><h2>Distribusi Sentimen Feedback</h2><p class="desc">Jumlah dimensi feedback yang tergolong Positif vs. Cukup (perlu review).</p></div>
+        </div>
+        <div class="grid-2">
+          <div class="chart-wrap" style="height:220px;"><canvas id="feedbackDonutChart"></canvas></div>
+          <div class="donut-legend" id="feedbackDonutLegend"></div>
         </div>
       </div>
     </section>
@@ -439,7 +504,7 @@ const recommendations = [
   {area:'Communication', insight:'Skor komunikasi 4,00/5 — positif.', rec:'Tindak lanjuti Action Signal dari Feedback Summary untuk campaign berikutnya.'},
 ];
 const decisionLog = [
-  {area:'Content Format', decision:'Mempertahankan komposisi 2 Reels dan 2 Carousel sesuai SOW, serta mengoptimalkan pendekatan konten berdasarkan performa masing-masing format dan mengoptimalkan pendekatan konten berdasarkan performa masing-masing format', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Rata-rata Views; Engagement Rate'},
+  {area:'Content Format', decision:'Mempertahankan komposisi 1 Carousel dan 1 Reels untuk masing-masing buku dan mengoptimalkan pendekatan konten berdasarkan performa masing-masing format', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Rata-rata Views; Engagement Rate'},
   {area:'Creator Selection', decision:'Menggunakan data performa creator sebagai salah satu pertimbangan dalam pemilihan creator pada campaign berikutnya', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Engagement Rate Creator; Retention Rate'},
   {area:'Brief Improvement', decision:'Memperjelas dan menyederhanakan brief campaign berikutnya', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Skor Brief ≥ 4/5'},
   {area:'Timeline Management', decision:'Menambahkan reminder deadline 2–3 hari sebelum batas waktu publikasi', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Skor Timeline ≥ 4/5; Ketepatan Waktu Publikasi'},
@@ -552,8 +617,6 @@ decisionLog.forEach(d=>{
 /* ---------- CHARTS ---------- */
 Chart.defaults.font.family = "'Inter',sans-serif";
 Chart.defaults.color = '#716C87';
-const valueLabelPlugin={id:'valueLabels',afterDatasetsDraw(chart){const{ctx}=chart;ctx.save();chart.data.datasets.forEach((ds,di)=>{const meta=chart.getDatasetMeta(di);meta.data.forEach((bar,i)=>{if(!bar) return; const v=ds.data[i]; ctx.fillStyle='#3A3550';ctx.font='600 10px Inter';ctx.textAlign=bar.horizontal?'left':'center';ctx.textBaseline='middle'; let text=(typeof v==='number'&&v<20)?v.toLocaleString('id-ID',{maximumFractionDigits:2})+'%':fmtInt(v); if(bar.horizontal) ctx.fillText(text,bar.x+7,bar.y); else ctx.fillText(text,bar.x,bar.y-9);});});ctx.restore();}};
-Chart.register(valueLabelPlugin);
 
 new Chart(document.getElementById('miniFormatChart'),{
   type:'bar',
@@ -569,7 +632,7 @@ new Chart(document.getElementById('miniCreatorChart'),{
 new Chart(document.getElementById('formatViewsChart'),{
   type:'bar',
   data:{labels:formatAgg.map(f=>f.format),datasets:[{data:formatAgg.map(f=>f.avgViews),backgroundColor:['#7C3AED','#FB7185'],borderRadius:8,maxBarThickness:70}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:(ctx)=>fmtInt(ctx.raw)+' avg views'}}},onClick:(evt,elements)=>{if(!elements.length)return; const f=formatAgg[elements[0].index]; document.getElementById('formatScore').innerHTML=`<span>Selected format</span><strong>${f.format}</strong><div class="score-grid"><div><b>${fmtInt(f.avgViews)}</b><small>Avg Views</small></div><div><b>${fmtPct(f.avgER)}</b><small>Avg ER</small></div><div><b>${fmtPct(f.avgRet)}</b><small>Retention</small></div></div>`;}},scales:{y:{beginAtZero:true,grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
 });
 new Chart(document.getElementById('formatErChart'),{
   type:'bar',
@@ -581,7 +644,18 @@ new Chart(document.getElementById('formatErChart'),{
 });
 
 let creatorChartInstance;
+const creatorChartLegend = document.getElementById('creatorChartLegend');
+function updateCreatorLegend(metric){
+  if(metric==='er'){
+    creatorChartLegend.innerHTML = '<span><span class="dot" style="background:var(--red);"></span>ER di bawah 3% (perlu perhatian)</span><span><span class="dot" style="background:var(--violet);"></span>ER di atas target</span>';
+  } else if(metric==='views'){
+    creatorChartLegend.innerHTML = '<span><span class="dot" style="background:var(--violet);"></span>Total Views per creator (warna berbeda tiap creator)</span>';
+  } else {
+    creatorChartLegend.innerHTML = '<span><span class="dot" style="background:var(--violet);"></span>Retention Rate per creator (warna berbeda tiap creator)</span>';
+  }
+}
 function drawCreatorChart(metric){
+  updateCreatorLegend(metric);
   const sorted = [...creatorInsights].sort((a,b)=>b[metric]-a[metric]);
   const isPct = metric==='er' || metric==='ret';
   const data = sorted.map(c=> isPct ? +(c[metric]*100).toFixed(2) : c[metric]);
@@ -590,7 +664,7 @@ function drawCreatorChart(metric){
   creatorChartInstance = new Chart(ctx,{
     type:'bar',
     data:{labels:sorted.map(c=>c.creator),datasets:[{data, backgroundColor:sorted.map((c,i)=> metric==='er' && c.er<0.03 ? '#EF4444' : PALETTE[i%PALETTE.length]), borderRadius:8}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:(ctx)=>{const c=sorted[ctx.dataIndex]; return [isPct ? ((c[metric]*100).toFixed(2)+'%') : fmtInt(c[metric]), 'Views '+fmtInt(c.views), 'ER '+fmtPct(c.er), 'Retention '+fmtPct(c.ret)];}}}},onClick:(evt,elements)=>{if(!elements.length)return; const c=sorted[elements[0].index]; document.getElementById('creatorScore').innerHTML=`<span>Selected creator</span><strong>${c.creator}</strong><div class="score-grid"><div><b>${fmtInt(c.views)}</b><small>Views</small></div><div><b>${fmtPct(c.er)}</b><small>Avg ER</small></div><div><b>${fmtPct(c.ret)}</b><small>Retention</small></div></div>`;}},scales:{x:{beginAtZero:true,ticks:{callback:v=> isPct ? v+'%' : fmtInt(v)},grid:{color:'#F1EFFA'}},y:{grid:{display:false}}}}
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{callback:v=> isPct ? v+'%' : fmtInt(v)},grid:{color:'#F1EFFA'}},y:{grid:{display:false}}}}
   });
 }
 drawCreatorChart('er');
@@ -601,6 +675,70 @@ document.querySelectorAll('#creatorMetricToggle button').forEach(btn=>{
     drawCreatorChart(btn.dataset.metric);
   });
 });
+
+/* ---------- Donut: Distribusi Kategori Konten ---------- */
+(function(){
+  const counts = {'Di Atas Target':0, 'Perlu Ditingkatkan':0};
+  campaignPerformance.forEach(r=>{ counts[r[7]] = (counts[r[7]]||0) + 1; });
+  const total = campaignPerformance.length;
+  const labels = Object.keys(counts);
+  const colors = ['#10B981','#EF4444'];
+  new Chart(document.getElementById('categoryDonutChart'),{
+    type:'doughnut',
+    data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} konten`}}}}
+  });
+  const legend = document.getElementById('categoryLegend');
+  labels.forEach((l,i)=>{
+    const pct = ((counts[l]/total)*100).toFixed(1);
+    const el = document.createElement('div'); el.className='item';
+    el.innerHTML = `<span class="lbl"><span class="dot" style="background:${colors[i]};"></span>${l}</span><span><span class="num">${counts[l]}</span><span class="pct">(${pct}%)</span></span>`;
+    legend.appendChild(el);
+  });
+})();
+
+/* ---------- Donut: Distribusi Format ---------- */
+(function(){
+  const counts = {Carousel:0, Reels:0};
+  subFormat.forEach(s=>{ const fmt = s.name.startsWith('Carousel') ? 'Carousel':'Reels'; counts[fmt]+=s.count; });
+  const total = counts.Carousel + counts.Reels;
+  const labels = Object.keys(counts);
+  const colors = ['#7C3AED','#FB7185'];
+  new Chart(document.getElementById('formatShareDonutChart'),{
+    type:'doughnut',
+    data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} konten`}}}}
+  });
+  const legend = document.getElementById('formatShareLegend');
+  labels.forEach((l,i)=>{
+    const pct = ((counts[l]/total)*100).toFixed(1);
+    const el = document.createElement('div'); el.className='item';
+    el.innerHTML = `<span class="lbl"><span class="dot" style="background:${colors[i]};"></span>${l}</span><span><span class="num">${counts[l]}</span><span class="pct">(${pct}%)</span></span>`;
+    legend.appendChild(el);
+  });
+})();
+
+/* ---------- Donut: Distribusi Sentimen Feedback ---------- */
+(function(){
+  const counts = {};
+  feedbackSummary.forEach(f=>{ counts[f.interp] = (counts[f.interp]||0) + 1; });
+  const total = feedbackSummary.length;
+  const labels = Object.keys(counts);
+  const colorMap = {Positif:'#10B981', Cukup:'#F59E0B'};
+  const colors = labels.map(l=>colorMap[l] || '#7C3AED');
+  new Chart(document.getElementById('feedbackDonutChart'),{
+    type:'doughnut',
+    data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} dimensi`}}}}
+  });
+  const legend = document.getElementById('feedbackDonutLegend');
+  labels.forEach((l,i)=>{
+    const pct = ((counts[l]/total)*100).toFixed(1);
+    const el = document.createElement('div'); el.className='item';
+    el.innerHTML = `<span class="lbl"><span class="dot" style="background:${colors[i]};"></span>${l}</span><span><span class="num">${counts[l]}</span><span class="pct">(${pct}%)</span></span>`;
+    legend.appendChild(el);
+  });
+})();
 
 new Chart(document.getElementById('feedbackChart'),{
   type:'bar',
