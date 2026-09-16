@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdi Creator Hub — Collaboration & Decision Campaign Dashboard</title>
+<title>Abdi Creator Hub — Dashboard Campaign</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
@@ -431,6 +431,21 @@
     <section class="page" id="page-rekomendasi">
       <div class="page-head"><div><h1>Rekomendasi</h1><p>Evidence dan insight per area, menunggu keputusan final tim.</p></div></div>
       <div class="rec-grid" id="recGrid"></div>
+
+      <div class="card" style="margin-top:22px;">
+        <div class="card-head" style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+          <div>
+            <h3 style="margin:0 0 4px;font-size:15px;">Top 5 Rekomendasi Username IG untuk Kerjasama Bulan Depan</h3>
+            <p style="margin:0;font-size:12.5px;color:var(--muted);">Diranking berdasarkan Engagement Rate &amp; Retention Rate tertinggi pada pilot campaign berjalan.</p>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Rank</th><th>Username IG</th><th>Konten</th><th>Avg Views</th><th>Engagement Rate</th><th>Retention Rate</th><th>Alasan</th></tr></thead>
+            <tbody id="top5Body"></tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <!-- KEPUTUSAN -->
@@ -628,6 +643,25 @@ recommendations.forEach(r=>{
   el.className='rec-card';
   el.innerHTML = `<div class="area">${r.area}</div><div class="insight">${r.insight}</div><div class="rec">${r.rec}</div><span class="status">Open</span>`;
   recGrid.appendChild(el);
+});
+
+/* ---------- Top 5 rekomendasi username IG (kerjasama bulan depan) ---------- */
+const top5Creators = [...creatorInsights]
+  .sort((a,b)=> (b.er - a.er) || (b.ret - a.ret))
+  .slice(0,5)
+  .map(c=>{
+    const avgViews = c.views / c.count;
+    let alasan;
+    if(c.er >= 0.06) alasan = 'ER tertinggi pada pilot, indikasi audience fit yang kuat.';
+    else if(c.ret >= 0.60) alasan = 'ER solid didukung retention tinggi — konten ditonton sampai akhir.';
+    else alasan = 'Kombinasi ER dan retention konsisten di atas rata-rata pilot.';
+    return {...c, avgViews, alasan};
+  });
+const top5Body = document.getElementById('top5Body');
+top5Creators.forEach((c,i)=>{
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td><span class="pill pos">#${i+1}</span></td><td>@${c.creator.toLowerCase()}</td><td>${c.count}</td><td>${fmtInt(c.avgViews)}</td><td>${fmtPct(c.er)}</td><td>${fmtPct(c.ret)}</td><td style="white-space:normal;min-width:220px;color:var(--muted);font-size:12.5px;">${c.alasan}</td>`;
+  top5Body.appendChild(tr);
 });
 
 /* ---------- Decision table ---------- */
