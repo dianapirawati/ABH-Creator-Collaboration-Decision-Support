@@ -196,7 +196,34 @@
   .donut-legend .item .pct{font-size:11.5px;color:var(--muted);margin-left:6px;font-weight:500;}
 </style>
 </head>
-<body>
+<style>
+  .month-toggle{position:sticky;top:0;z-index:20;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .month-toggle .mt-label{font-size:12.5px;font-weight:700;color:var(--muted);}
+  .month-toggle .mt-group{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:10px;}
+  .month-toggle .mt-group button{font-size:12.5px;font-weight:700;padding:7px 14px;border:none;background:transparent;color:var(--muted);border-radius:7px;cursor:pointer;}
+  .month-toggle .mt-group button.active{background:var(--violet);color:#fff;}
+  .month-toggle .mt-note{font-size:12px;color:var(--muted);}
+  .month-flag{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-left:8px;}
+  .month-flag.Agustus{background:var(--teal-soft);color:var(--teal);}
+  .month-flag.September{background:var(--coral-soft);color:var(--coral);}
+  .month-flag.Gabungan{background:var(--violet-soft);color:var(--violet);}
+  .compare-note{font-size:12.5px;color:var(--muted);background:var(--bg);border-radius:10px;padding:10px 14px;margin-bottom:16px;}
+  .subtabs{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:10px;margin-bottom:14px;width:fit-content;}
+  .subtabs button{font-size:12.5px;font-weight:700;padding:7px 14px;border:none;background:transparent;color:var(--muted);border-radius:7px;cursor:pointer;}
+  .subtabs button.active{background:var(--card);color:var(--violet);box-shadow:0 1px 3px rgba(27,17,64,0.12);}
+
+  /* ---------- Sidebar: professional navy theme ---------- */
+  aside{background:linear-gradient(180deg,#1B2036 0%, #14172A 100%) !important;color:#C7CBE0;border-right:1px solid #0F1220 !important;}
+  aside .logo{border-bottom:1px solid rgba(255,255,255,0.10) !important;}
+  aside .logo .name{color:#fff !important;}
+  aside .logo .sub{color:#8B90B3 !important;}
+  aside nav.side-nav button{color:#A9AECB !important;}
+  aside nav.side-nav button:hover{background:rgba(255,255,255,0.06) !important;color:#fff !important;}
+  aside nav.side-nav button.active{background:rgba(124,58,237,0.22) !important;color:#fff !important;box-shadow:inset 3px 0 0 var(--violet) !important;}
+  aside .side-author{border-top:1px solid rgba(255,255,255,0.10) !important;}
+  aside .side-author .sa-label{color:#9AA0C7 !important;}
+  aside .side-author .sa-value{color:#E4E6F5 !important;}
+</style>
 
 <div class="app">
   <aside>
@@ -219,13 +246,23 @@
     </nav>
     <div class="side-author">
       <div class="sa-label">Created By</div>
-      <div class="sa-value">Diana Putri Irawati (255288010)<br>Master's Programme in Marketing, Innovation and Technology, Department of Business Administration. Polban.</div>
+      <div class="sa-value">Diana Putri Irawati (255288010)</div>
       <div class="sa-label">Supervised By</div>
-      <div class="sa-value">Rivan Sutrisno, SE., MA., PhD.</div>
+      <div class="sa-value">Rivan Sutrisno, S.E., M.A., Ph.D.</div>
+      <div class="sa-value" style="opacity:.85;">Master's Programme in Marketing, Innovation and Technology, Department of Business Administration. Polban.</div>
     </div>
   </aside>
 
   <main>
+
+    <div class="month-toggle" id="page-tentang-hide">
+      <span class="mt-label">📅 Data Bulan:</span>
+      <div class="mt-group" id="monthToggle">
+        <button data-month="Gabungan" class="active">Gabungan</button>
+        <button data-month="Agustus">Agustus 2026</button>
+        <button data-month="September">September 2026</button>
+      </div>
+    </div>
 
     <!-- TENTANG -->
     <section class="page active" id="page-tentang">
@@ -236,7 +273,6 @@
           ABH is a creator collaboration program developed for Buku Abdi, providing a structured pathway for book-content creators while preserving authenticity and generating measurable campaign evidence. <b>Barter</b> is the collaboration mechanism, while its strategic value lies in a repeatable learning loop. ABH also serves as a decision-support pathway, transforming campaign data and creator feedback into actionable insights for data-informed campaign decisions.
         </p>
       </div>
-
       <div class="card-head" style="margin-bottom:10px;"><h2>Alur Decision-Support ABH</h2><p class="desc">From Barter-Based Collaboration to Data-Informed Campaign Decisions.</p></div>
       <div class="flow-grid">
         <div class="flow-step"><div class="num">1</div><div class="title">Barter</div><div class="sub">Mekanisme kolaborasi dengan creator</div></div>
@@ -248,7 +284,7 @@
 
       <div class="author-card">
         <div class="author-row"><div class="author-label">Created By</div><div class="author-value">Diana Putri Irawati <span class="author-id">(255288010)</span></div></div>
-        <div class="author-row"><div class="author-label">Supervised By</div><div class="author-value">Rivan Sutrisno, SE., MA., PhD.</div></div>
+        <div class="author-row"><div class="author-label">Supervised By</div><div class="author-value">Rivan Sutrisno, S.E., M.A., Ph.D.</div></div>
         <div class="author-row"><div class="author-label">Programme</div><div class="author-value">Master's Programme in Marketing, Innovation and Technology, Department of Business Administration</div></div>
         <div class="author-row"><div class="author-label">Institution</div><div class="author-value">Politeknik Negeri Bandung (Polban)</div></div>
       </div>
@@ -257,41 +293,20 @@
     <!-- RINGKASAN -->
     <section class="page" id="page-ringkasan">
       <div class="page-head">
-        <div><h1>Ringkasan Campaign</h1><p>Performa 9 creator dan 31 konten pada pilot campaign Book Creator Collaboration.</p></div>
-        <div class="pill-badge">8/9 creator di atas target ER</div>
+        <div><h1>Ringkasan Campaign <span class="month-flag" id="ringkasanFlag">Gabungan</span></h1><p id="ringkasanSub">Performa creator dan konten pada campaign Book Creator Collaboration.</p></div>
+        <div class="pill-badge" id="ringkasanPill"></div>
       </div>
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="icon" style="background:var(--violet-soft);color:var(--violet);">👁</div>
-          <div class="val">58.421</div><div class="lbl">Total Views</div>
-          <span class="trend good">31 konten</span>
-        </div>
-        <div class="kpi-card">
-          <div class="icon" style="background:var(--coral-soft);color:var(--coral);">💬</div>
-          <div class="val">2.838</div><div class="lbl">Total Engagement</div>
-          <span class="trend good">Like+Comment+Repost+Send+Save</span>
-        </div>
-        <div class="kpi-card">
-          <div class="icon" style="background:var(--teal-soft);color:var(--teal);">📈</div>
-          <div class="val">5,74%</div><div class="lbl">Rata-rata Engagement Rate</div>
-          <span class="trend good">Target: 3%</span>
-        </div>
-        <div class="kpi-card">
-          <div class="icon" style="background:var(--amber-soft);color:var(--amber);">⏱</div>
-          <div class="val">52,60%</div><div class="lbl">Rata-rata Retention Rate</div>
-          <span class="trend good">Viewers ÷ Views</span>
-        </div>
-      </div>
-      <div class="kpi-grid">
-        <div class="kpi-card"><div class="val">3,89/5</div><div class="lbl">Skor Brief</div><span class="trend warn">Cukup</span></div>
-        <div class="kpi-card"><div class="val">4,00/5</div><div class="lbl">Skor Timeline</div><span class="trend good">Positif</span></div>
-        <div class="kpi-card"><div class="val">4,00/5</div><div class="lbl">Skor Komunikasi</div><span class="trend good">Positif</span></div>
+      <div class="kpi-grid" id="kpiGrid1"></div>
+      <div class="kpi-grid" id="kpiGrid2">
+        <div class="kpi-card"><div class="val">3,89/5 → 4,50/5</div><div class="lbl">Skor Brief (Agustus → September)</div><span class="trend good">Meningkat</span></div>
+        <div class="kpi-card"><div class="val">4,00/5 → 3,67/5</div><div class="lbl">Skor Timeline (Agustus → September)</div><span class="trend warn">Menurun</span></div>
+        <div class="kpi-card"><div class="val">4,00/5 → 4,33/5</div><div class="lbl">Skor Komunikasi (Agustus → September)</div><span class="trend good">Meningkat</span></div>
         <div class="kpi-card"><div class="val">5</div><div class="lbl">Rekomendasi &amp; Keputusan Pending</div><span class="trend warn">Menunggu review</span></div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div><h2>Sekilas performa format</h2><p class="desc">Carousel unggul di views, Reels unggul di ER &amp; retention.</p></div>
+          <div><h2>Sekilas performa format</h2><p class="desc">Carousel vs Reels &amp; Top 5 Creator by ER, sesuai bulan yang dipilih.</p></div>
         </div>
         <div class="legend-row"><span><span class="dot" style="background:var(--violet);"></span>Carousel</span><span><span class="dot" style="background:var(--coral);"></span>Reels</span></div>
         <div class="grid-2">
@@ -302,18 +317,28 @@
 
       <div class="card">
         <div class="card-head">
-          <div><h2>Distribusi Kategori Konten</h2><p class="desc">Perbandingan konten yang mencapai target ER vs. yang perlu ditingkatkan, dari 31 konten.</p></div>
+          <div><h2>Distribusi Kategori Konten</h2><p class="desc">Perbandingan konten yang mencapai target ER vs. yang perlu ditingkatkan.</p></div>
         </div>
         <div class="grid-2">
           <div class="chart-wrap" style="height:220px;"><canvas id="categoryDonutChart"></canvas></div>
           <div class="donut-legend" id="categoryLegend"></div>
         </div>
       </div>
+
+      <div class="card">
+        <div class="card-head"><div><h2>Agustus vs September — sekilas</h2><p class="desc">Perbandingan langsung dua bulan, terlepas dari toggle di atas.</p></div></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>KPI</th><th>Agustus</th><th>September</th><th>Gabungan</th></tr></thead>
+            <tbody id="monthCompareBody"></tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
     <!-- FORMAT -->
     <section class="page" id="page-format">
-      <div class="page-head"><div><h1>Carousel vs Reels</h1><p>Perbandingan performa dua format konten pada pilot campaign.</p></div></div>
+      <div class="page-head"><div><h1>Carousel vs Reels <span class="month-flag" id="formatFlag">Gabungan</span></h1><p>Perbandingan performa dua format konten.</p></div></div>
       <div class="card">
         <div class="grid-2">
           <div>
@@ -340,7 +365,7 @@
 
       <div class="card">
         <div class="card-head">
-          <div><h2>Distribusi Jumlah Konten per Format</h2><p class="desc">Proporsi 31 konten pilot berdasarkan format.</p></div>
+          <div><h2>Distribusi Jumlah Konten per Format</h2><p class="desc">Proporsi konten berdasarkan format.</p></div>
         </div>
         <div class="grid-2">
           <div class="chart-wrap" style="height:220px;"><canvas id="formatShareDonutChart"></canvas></div>
@@ -351,7 +376,7 @@
 
     <!-- CREATOR -->
     <section class="page" id="page-creator">
-      <div class="page-head"><div><h1>Performa per Creator</h1><p>Diurutkan dari metrik yang dipilih.</p></div></div>
+      <div class="page-head"><div><h1>Performa per Creator <span class="month-flag" id="creatorFlag">Gabungan</span></h1><p>Diurutkan dari metrik yang dipilih.</p></div></div>
       <div class="card">
         <div class="card-head">
           <h2>Perbandingan creator</h2>
@@ -362,10 +387,10 @@
           </div>
         </div>
         <div class="legend-row" id="creatorChartLegend"><span><span class="dot" style="background:var(--red);"></span>ER di bawah 3% (perlu perhatian)</span><span><span class="dot" style="background:var(--violet);"></span>ER di atas target</span></div>
-        <div class="chart-wrap" style="height:320px;"><canvas id="creatorChart"></canvas></div>
+        <div class="chart-wrap" style="height:340px;" id="creatorChartWrap"><canvas id="creatorChart"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-head"><h2>Tabel creator</h2><p class="desc">Klik header kolom untuk mengurutkan.</p></div>
+        <div class="card-head"><h2>Tabel creator</h2><p class="desc">Klik header kolom untuk mengurutkan. Kolom "Bulan Aktif" menunjukkan di bulan mana creator berkontribusi (hanya tampil pada tampilan Gabungan).</p></div>
         <div class="table-scroll">
           <table>
             <thead>
@@ -375,6 +400,7 @@
                 <th data-key="views">Total Views <span class="arrow">↕</span></th>
                 <th data-key="er">Avg ER <span class="arrow">↕</span></th>
                 <th data-key="ret">Avg Retention <span class="arrow">↕</span></th>
+                <th>Bulan Aktif</th>
               </tr>
             </thead>
             <tbody id="creatorTableBody"></tbody>
@@ -385,7 +411,7 @@
 
     <!-- KONTEN -->
     <section class="page" id="page-konten">
-      <div class="page-head"><div><h1>Detail Konten</h1><p>31 konten — filter per format atau cari nama creator.</p></div></div>
+      <div class="page-head"><div><h1>Detail Konten <span class="month-flag" id="kontenFlag">Gabungan</span></h1><p id="kontenSub">79 konten — filter per format atau cari nama creator.</p></div></div>
       <div class="card">
         <div class="table-controls">
           <button class="chip active" data-filter="all">Semua format</button>
@@ -396,7 +422,7 @@
         <div class="table-scroll">
           <table>
             <thead>
-              <tr><th>Creator</th><th>Content</th><th>Format</th><th>Views</th><th>Viewers</th><th>Total Eng.</th><th>ER</th><th>Retention</th><th>Kategori</th></tr>
+              <tr><th>Creator</th><th>Content</th><th>Format</th><th>Views</th><th>Viewers</th><th>Total Eng.</th><th>ER</th><th>Retention</th><th>Kategori</th><th>Bulan</th></tr>
             </thead>
             <tbody id="perfTableBody"></tbody>
           </table>
@@ -407,18 +433,25 @@
 
     <!-- FEEDBACK -->
     <section class="page" id="page-feedback">
-      <div class="page-head"><div><h1>Suara Creator</h1><p>Rata-rata skor 1–5 dari 9 creator yang mengisi survei pasca-campaign.</p></div></div>
+      <div class="page-head"><div><h1>Suara Creator</h1><p>Rata-rata skor 1–5, dibandingkan antara Agustus dan September 2026.</p></div></div>
+      <div class="compare-note">📌 Halaman ini selalu menampilkan perbandingan Agustus vs September (tidak dipengaruhi toggle Data Bulan di atas), karena tujuannya melihat tren kualitas campaign antar bulan.</div>
       <div class="card">
-        <div class="legend-row"><span><span class="dot" style="background:var(--green);"></span>Positif</span><span><span class="dot" style="background:var(--amber);"></span>Cukup (perlu review)</span></div>
-        <div class="grid-2">
-          <div class="chart-wrap" style="height:260px;"><canvas id="feedbackChart"></canvas></div>
-          <div id="feedbackNotes"></div>
+        <div class="legend-row"><span><span class="dot" style="background:var(--teal);"></span>Agustus</span><span><span class="dot" style="background:var(--coral);"></span>September</span></div>
+        <div class="chart-wrap" style="height:280px;"><canvas id="feedbackChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Detail per dimensi</h2></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Dimensi</th><th>Agustus</th><th>September</th><th>Gabungan</th><th>Interpretasi (Gabungan)</th><th>Action Signal</th></tr></thead>
+            <tbody id="feedbackTableBody"></tbody>
+          </table>
         </div>
       </div>
 
       <div class="card">
         <div class="card-head">
-          <div><h2>Distribusi Sentimen Feedback</h2><p class="desc">Jumlah dimensi feedback yang tergolong Positif vs. Cukup (perlu review).</p></div>
+          <div><h2>Distribusi Sentimen Feedback (Gabungan)</h2><p class="desc">Jumlah dimensi feedback yang tergolong Positif vs. Cukup (perlu review), berdasarkan rata-rata gabungan.</p></div>
         </div>
         <div class="grid-2">
           <div class="chart-wrap" style="height:220px;"><canvas id="feedbackDonutChart"></canvas></div>
@@ -429,14 +462,14 @@
 
     <!-- REKOMENDASI -->
     <section class="page" id="page-rekomendasi">
-      <div class="page-head"><div><h1>Rekomendasi</h1><p>Evidence dan insight per area, menunggu keputusan final tim.</p></div></div>
+      <div class="page-head"><div><h1>Rekomendasi</h1><p>Evidence dan insight per area — kolom Agustus &amp; September ditampilkan berdampingan agar terlihat konsisten atau tidaknya pola antar bulan.</p></div></div>
       <div class="rec-grid" id="recGrid"></div>
 
       <div class="card" style="margin-top:22px;">
         <div class="card-head" style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
           <div>
-            <h3 style="margin:0 0 4px;font-size:15px;">Top 5 Rekomendasi Username IG untuk Kerjasama Bulan Depan</h3>
-            <p style="margin:0;font-size:12.5px;color:var(--muted);">Diranking berdasarkan Engagement Rate &amp; Retention Rate tertinggi pada pilot campaign berjalan.</p>
+            <h3 style="margin:0 0 4px;font-size:15px;">Top 5 Rekomendasi Username IG untuk Kerjasama Bulan Depan <span class="month-flag" id="top5Flag">Gabungan</span></h3>
+            <p style="margin:0;font-size:12.5px;color:var(--muted);">Diranking berdasarkan Engagement Rate &amp; Retention Rate tertinggi. Mengikuti toggle <em>Data Bulan</em> di bagian atas halaman — pilih Agustus atau September untuk melihat Top 5 khusus bulan tersebut.</p>
           </div>
         </div>
         <div class="table-scroll">
@@ -450,18 +483,18 @@
 
     <!-- KEPUTUSAN -->
     <section class="page" id="page-keputusan">
-      <div class="page-head"><div><h1>Log Keputusan Campaign</h1><p>Lima keputusan masih berstatus Pending.</p></div></div>
+      <div class="page-head"><div><h1>Log Keputusan Campaign</h1><p>Lima keputusan masih berstatus Pending — evidence Agustus &amp; September disertakan sebagai konteks.</p></div></div>
       <div class="card">
         <div class="table-scroll">
           <table>
-            <thead><tr><th>Area</th><th>Keputusan Final</th><th>PIC</th><th>Status</th><th>Follow-up KPI</th></tr></thead>
+            <thead><tr><th>Area</th><th>Keputusan Final</th><th>Evidence Agustus</th><th>Evidence September</th><th>PIC</th><th>Status</th><th>Follow-up KPI</th></tr></thead>
             <tbody id="decisionTableBody"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <footer>Abdi Creator Hub — Dashboard Campaign · data pilot: 9 creator, 31 konten</footer>
+    <footer>Abdi Creator Hub — Dashboard Campaign · data: 16 creator, 79 konten (Agustus + September 2026)</footer>
   </main>
 </div>
 
@@ -469,87 +502,21 @@
 const fmtInt = n => new Intl.NumberFormat('id-ID').format(Math.round(n));
 const fmtPct = n => (n*100).toLocaleString('id-ID',{minimumFractionDigits:1,maximumFractionDigits:1}) + '%';
 const fmt1 = n => n.toLocaleString('id-ID',{minimumFractionDigits:2,maximumFractionDigits:2});
-const PALETTE = ['#7C3AED','#FB7185','#0EA5A5','#F59E0B','#10B981','#6366F1','#F97316','#14B8A6','#EC4899'];
+const PALETTE = ['#7C3AED','#FB7185','#0EA5A5','#F59E0B','#10B981','#6366F1','#F97316','#14B8A6','#EC4899','#8B5CF6','#EF4444','#22C55E'];
 
-/* ---------- DATA ---------- */
-const formatAgg = [
-  {format:'Carousel', avgViews:2507.93, avgER:0.04232, avgRet:0.39258},
-  {format:'Reels', avgViews:1300.13, avgER:0.05990, avgRet:0.65116},
-];
-const subFormat = [
-  {name:'Carousel 1', count:8, totalViews:14604, avgViews:1825.5, avgER:0.054643, avgRet:0.355626},
-  {name:'Carousel 2', count:7, totalViews:23015, avgViews:3287.857, avgER:0.034499, avgRet:0.434821},
-  {name:'Reels 1', count:9, totalViews:11641, avgViews:1293.444, avgER:0.059187, avgRet:0.604102},
-  {name:'Reels 2', count:7, totalViews:9161, avgViews:1308.714, avgER:0.060801, avgRet:0.711662},
-];
-const creatorInsights = [
-  {creator:'Irmanaeni', count:3, views:5268, er:0.07137, ret:0.49602},
-  {creator:'Diarybaca_fany', count:4, views:8064, er:0.05655, ret:0.60473},
-  {creator:'Dreamofgirl89_', count:4, views:9113, er:0.05553, ret:0.51259},
-  {creator:'Raniqolbi', count:4, views:5343, er:0.05390, ret:0.62345},
-  {creator:'Mrmusy_afak', count:4, views:6594, er:0.04641, ret:0.52604},
-  {creator:'Setiyani_anggun', count:4, views:7095, er:0.04454, ret:0.56140},
-  {creator:'Iffahnsh', count:3, views:5302, er:0.04319, ret:0.35022},
-  {creator:'Ranyzakyaaa', count:3, views:7180, er:0.03273, ret:0.38657},
-  {creator:'Tulisandynana07_', count:2, views:4462, er:0.02824, ret:0.64801},
-];
-const campaignPerformance = [
-  ['Mrmusy_afak','Carousel 1','Carousel',2946,1119,105,0.035642,'Di Atas Target',0.379837],
-  ['Mrmusy_afak','Reels 1','Reels',1151,709,69,0.059948,'Di Atas Target',0.615986],
-  ['Mrmusy_afak','Carousel 2','Carousel',1832,788,79,0.043122,'Di Atas Target',0.430131],
-  ['Mrmusy_afak','Reels 2','Reels',665,451,53,0.079699,'Di Atas Target',0.678195],
-  ['Raniqolbi','Carousel 1','Carousel',1267,502,81,0.063931,'Di Atas Target',0.396212],
-  ['Raniqolbi','Reels 1','Reels',551,365,45,0.081670,'Di Atas Target',0.662432],
-  ['Raniqolbi','Carousel 2','Carousel',2891,1673,131,0.045313,'Di Atas Target',0.578692],
-  ['Raniqolbi','Reels 2','Reels',634,543,31,0.048896,'Di Atas Target',0.856467],
-  ['Iffahnsh','Carousel 1','Carousel',1405,417,72,0.051246,'Di Atas Target',0.296797],
-  ['Iffahnsh','Reels 1','Reels',936,411,40,0.042735,'Di Atas Target',0.439103],
-  ['Iffahnsh','Carousel 2','Carousel',2961,932,117,0.039514,'Di Atas Target',0.314759],
-  ['Irmanaeni','Carousel 1','Carousel',2063,781,118,0.057198,'Di Atas Target',0.378575],
-  ['Irmanaeni','Reels 1','Reels',1950,1023,145,0.074359,'Di Atas Target',0.524615],
-  ['Irmanaeni','Reels 2','Reels',1255,734,113,0.090040,'Di Atas Target',0.584861],
-  ['Diarybaca_fany','Carousel 1','Carousel',2064,704,137,0.066376,'Di Atas Target',0.341085],
-  ['Diarybaca_fany','Reels 1','Reels',1432,1141,71,0.049581,'Di Atas Target',0.796788],
-  ['Diarybaca_fany','Carousel 2','Carousel',2838,1316,181,0.063777,'Di Atas Target',0.463707],
-  ['Diarybaca_fany','Reels 2','Reels',1730,1414,67,0.038728,'Di Atas Target',0.817341],
-  ['Ranyzakyaaa','Carousel 1','Carousel',1993,632,86,0.043151,'Di Atas Target',0.317110],
-  ['Ranyzakyaaa','Reels 1','Reels',1488,831,71,0.047715,'Di Atas Target',0.558468],
-  ['Ranyzakyaaa','Carousel 2','Carousel',3699,1051,78,0.021087,'Perlu Ditingkatkan',0.284131],
-  ['Setiyani_anggun','Carousel 1','Carousel',1638,603,85,0.051893,'Di Atas Target',0.368132],
-  ['Setiyani_anggun','Reels 1','Reels',1091,634,69,0.063245,'Di Atas Target',0.581118],
-  ['Setiyani_anggun','Carousel 2','Carousel',2865,1813,69,0.024084,'Perlu Ditingkatkan',0.632810],
-  ['Setiyani_anggun','Reels 2','Reels',1501,996,93,0.061959,'Di Atas Target',0.663558],
-  ['Dreamofgirl89_','Carousel 1','Carousel',1228,451,114,0.092834,'Di Atas Target',0.367264],
-  ['Dreamofgirl89_','Reels 1','Reels',1074,671,124,0.115456,'Di Atas Target',0.624767],
-  ['Dreamofgirl89_','Carousel 2','Carousel',5929,2013,139,0.023444,'Perlu Ditingkatkan',0.339518],
-  ['Dreamofgirl89_','Reels 2','Reels',882,634,129,0.146259,'Di Atas Target',0.718821],
-  ['Tulisandynana07_','Reels 1','Reels',1968,1247,55,0.027947,'Perlu Ditingkatkan',0.633638],
-  ['Tulisandynana07_','Reels 2','Reels',2494,1652,71,0.028468,'Perlu Ditingkatkan',0.662390],
-];
-const feedbackSummary = [
-  {dim:'Brief mudah dipahami', avg:3.89, interp:'Cukup', signal:'Review & optimalkan', tag:'neu'},
-  {dim:'Brief campaign mudah dipahami & diikuti', avg:3.78, interp:'Cukup', signal:'Review & optimalkan', tag:'neu'},
-  {dim:'Timeline dapat dikelola dengan baik', avg:4.00, interp:'Positif', signal:'Pertahankan', tag:'pos'},
-  {dim:'Komunikasi berjalan efektif', avg:4.00, interp:'Positif', signal:'Pertahankan', tag:'pos'},
-  {dim:'Informasi buku cukup membantu', avg:4.00, interp:'Positif', signal:'Pertahankan', tag:'pos'},
-];
-const recommendations = [
-  {area:'Content Format', insight:'Carousel memiliki average views lebih tinggi pada pilot.', rec:'Prioritaskan format dengan performa lebih tinggi untuk pengujian berikutnya dan validasi kembali bersama ER serta retention.'},
-  {area:'Creator Performance', insight:'Creator dengan average ER tertinggi menjadi salah satu evidence performa.', rec:'Gunakan ER bersama views, retention, content fit, dan feedback; jangan memilih creator berdasarkan satu metrik saja.'},
-  {area:'Brief Quality', insight:'Skor brief 3,89/5 — cukup.', rec:'Tindak lanjuti Action Signal dari Feedback Summary untuk campaign berikutnya.'},
-  {area:'Timeline', insight:'Skor timeline 4,00/5 — positif.', rec:'Tindak lanjuti Action Signal dari Feedback Summary untuk campaign berikutnya.'},
-  {area:'Communication', insight:'Skor komunikasi 4,00/5 — positif.', rec:'Tindak lanjuti Action Signal dari Feedback Summary untuk campaign berikutnya.'},
-];
-const decisionLog = [
-  {area:'Content Format', decision:'Mempertahankan komposisi 1 Carousel dan 1 Reels untuk masing-masing buku dan mengoptimalkan pendekatan konten berdasarkan performa masing-masing format', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Rata-rata Views; Engagement Rate'},
-  {area:'Creator Selection', decision:'Menggunakan data performa creator sebagai salah satu pertimbangan dalam pemilihan creator pada campaign berikutnya', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Engagement Rate Creator; Retention Rate'},
-  {area:'Brief Improvement', decision:'Memperjelas dan menyederhanakan brief campaign berikutnya', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Skor Brief ≥ 4/5'},
-  {area:'Timeline Management', decision:'Menambahkan reminder deadline 2–3 hari sebelum batas waktu publikasi', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Skor Timeline ≥ 4/5; Ketepatan Waktu Publikasi'},
-  {area:'Communication Workflow', decision:'Mempertahankan komunikasi yang responsif dan memperjelas alur koordinasi campaign', pic:'Digital Marketing Supervisor', status:'Pending', kpi:'Skor Komunikasi ≥ 4/5'},
-];
+const DATA = {"kpi": {"Gabungan": {"label": "Gabungan (Agustus + September 2026)", "creators": 16, "content": 79, "views": 159702, "eng": 7737, "er": 0.0625386998182542, "ret": 0.497402090763008, "maxViews": 11523, "maxER": 0.146258503401361, "maxRet": 0.856466876971609, "erAbove3": 15}, "Agustus": {"label": "Agustus 2026", "creators": 9, "content": 31, "views": 58421, "eng": 2838, "er": 0.057397253380809, "ret": 0.526042126306605, "maxViews": 5929, "maxER": 0.146258503401361, "maxRet": 0.856466876971609, "erAbove3": 8}, "September": {"label": "September 2026", "creators": 12, "content": 48, "views": 101281, "eng": 4899, "er": 0.0658592173091042, "ret": 0.478905401141101, "maxViews": 11523, "maxER": 0.14207650273224, "maxRet": 0.83340582862114, "erAbove3": 11}}, "contentCategory": {"Gabungan": {"Di Atas Target": 70, "Perlu Ditingkatkan": 9}, "Agustus": {"Di Atas Target": 26, "Perlu Ditingkatkan": 5}, "September": {"Di Atas Target": 44, "Perlu Ditingkatkan": 4}}, "formatAgg": {"Gabungan": [{"format": "Carousel", "avgViews": 2436.30769230769, "avgER": 0.0421402711122337, "avgRet": 0.371725500596912, "count": 39}, {"format": "Reels", "avgViews": 1617.15, "avgER": 0.0577095507528677, "avgRet": 0.619936766174951, "count": 40}], "Agustus": [{"format": "Carousel", "avgViews": 2507.93333333333, "avgER": 0.0423190409101784, "avgRet": 0.39258390722106, "count": 15}, {"format": "Reels", "avgViews": 1300.125, "avgER": 0.0598980867224305, "avgRet": 0.651159206699304, "count": 16}], "September": [{"format": "Carousel", "avgViews": 2391.54166666667, "avgER": 0.042023102252731, "avgRet": 0.358688996456819, "count": 24}, {"format": "Reels", "avgViews": 1828.5, "avgER": 0.0566721356302981, "avgRet": 0.599121805825383, "count": 24}]}, "subFormat": {"Gabungan": [{"name": "Carousel 1", "count": 20, "totalViews": 51553, "avgViews": 2577.65, "avgER": 0.043081876903381, "avgRet": 0.349232196465675}, {"name": "Carousel 2", "count": 19, "totalViews": 43463, "avgViews": 2287.52631578947, "avgER": 0.0410233992131238, "avgRet": 0.395402662840319}, {"name": "Reels 1", "count": 21, "totalViews": 25973, "avgViews": 1236.80952380952, "avgER": 0.0632194971701382, "avgRet": 0.596940124283625}, {"name": "Reels 2", "count": 19, "totalViews": 38713, "avgViews": 2037.52631578947, "avgER": 0.0540128638958489, "avgRet": 0.645354107212732}], "Agustus": [{"name": "Carousel 1", "count": 8, "totalViews": 14604, "avgViews": 1825.5, "avgER": 0.0546425636811832, "avgRet": 0.355626437768445}, {"name": "Carousel 2", "count": 7, "totalViews": 23015, "avgViews": 3287.85714285714, "avgER": 0.0344992396263307, "avgRet": 0.434821015166907}, {"name": "Reels 1", "count": 9, "totalViews": 11641, "avgViews": 1293.44444444444, "avgER": 0.059187355038227, "avgRet": 0.60410167977482}, {"name": "Reels 2", "count": 7, "totalViews": 9161, "avgViews": 1308.71428571429, "avgER": 0.0608012225739548, "avgRet": 0.711661741316497}], "September": [{"name": "Carousel 1", "count": 12, "totalViews": 36949, "avgViews": 3079.08333333333, "avgER": 0.0385125443178435, "avgRet": 0.344969368930496}, {"name": "Carousel 2", "count": 12, "totalViews": 20448, "avgViews": 1704, "avgER": 0.0483665884194053, "avgRet": 0.372408623983142}, {"name": "Reels 1", "count": 12, "totalViews": 14332, "avgViews": 1194.33333333333, "avgER": 0.0664945576332682, "avgRet": 0.591568957665229}, {"name": "Reels 2", "count": 12, "totalViews": 29552, "avgViews": 2462.66666666667, "avgER": 0.0519085002707093, "avgRet": 0.606674653985536}]}, "creatorInsights": {"Gabungan": [{"creator": "Aku_lillah", "count": 4, "views": 12127, "eng": 648, "er": 0.0534344850333966, "ret": 0.543606004767784, "best": 8364, "cat": "Di Atas Target"}, {"creator": "Arman_ranala", "count": 4, "views": 3376, "eng": 245, "er": 0.0725710900473934, "ret": 0.462066948783491, "best": 1333, "cat": "Di Atas Target"}, {"creator": "Birruya__", "count": 4, "views": 2717, "eng": 202, "er": 0.0743467059256533, "ret": 0.42220669031713, "best": 1055, "cat": "Di Atas Target"}, {"creator": "Bluetherealz", "count": 4, "views": 4176, "eng": 434, "er": 0.103927203065134, "ret": 0.47295019559381, "best": 1902, "cat": "Di Atas Target"}, {"creator": "Diarybaca_fany", "count": 8, "views": 30149, "eng": 1273, "er": 0.0422236226740522, "ret": 0.579280740716871, "best": 9718, "cat": "Di Atas Target"}, {"creator": "Dreamofgirl89_", "count": 4, "views": 9113, "eng": 506, "er": 0.0555250740700099, "ret": 0.512592388971002, "best": 5929, "cat": "Di Atas Target"}, {"creator": "Feet_depp", "count": 4, "views": 5512, "eng": 417, "er": 0.0756531204644412, "ret": 0.465832979676932, "best": 1721, "cat": "Di Atas Target"}, {"creator": "Iffahnsh", "count": 7, "views": 9213, "eng": 532, "er": 0.0577444914794312, "ret": 0.380905247348321, "best": 2961, "cat": "Di Atas Target"}, {"creator": "Irmanaeni", "count": 3, "views": 5268, "eng": 376, "er": 0.0713743356112377, "ret": 0.496016944439947, "best": 2063, "cat": "Di Atas Target"}, {"creator": "Lilrhymer", "count": 4, "views": 4443, "eng": 350, "er": 0.078775602070673, "ret": 0.432816369137714, "best": 1454, "cat": "Di Atas Target"}, {"creator": "Mrmusy_afak", "count": 8, "views": 13133, "eng": 611, "er": 0.0465240234523719, "ret": 0.497606264088677, "best": 2946, "cat": "Di Atas Target"}, {"creator": "Raniqolbi", "count": 4, "views": 5343, "eng": 288, "er": 0.0539023020774846, "ret": 0.623450709031365, "best": 2891, "cat": "Di Atas Target"}, {"creator": "Ranyzakyaaa", "count": 3, "views": 7180, "eng": 235, "er": 0.0327298050139276, "ret": 0.386569490902071, "best": 3699, "cat": "Di Atas Target"}, {"creator": "Setiyani_anggun", "count": 8, "views": 11912, "eng": 600, "er": 0.0503693754197448, "ret": 0.509777386147605, "best": 2865, "cat": "Di Atas Target"}, {"creator": "Tidakadarumahuntukku", "count": 4, "views": 23778, "eng": 602, "er": 0.0253175203970056, "ret": 0.513776749486476, "best": 11523, "cat": "Perlu Ditingkatkan"}, {"creator": "Tulisandynana07_", "count": 6, "views": 12262, "eng": 418, "er": 0.0340890556189855, "ret": 0.581692977020878, "best": 2494, "cat": "Di Atas Target"}], "Agustus": [{"creator": "Mrmusy_afak", "count": 4, "views": 6594, "eng": 306, "er": 0.0464058234758872, "ret": 0.526037414835676, "best": 2946, "cat": "Di Atas Target"}, {"creator": "Raniqolbi", "count": 4, "views": 5343, "eng": 288, "er": 0.0539023020774846, "ret": 0.623450709031365, "best": 2891, "cat": "Di Atas Target"}, {"creator": "Iffahnsh", "count": 3, "views": 5302, "eng": 229, "er": 0.0431912485854395, "ret": 0.350219414883987, "best": 2961, "cat": "Di Atas Target"}, {"creator": "Irmanaeni", "count": 3, "views": 5268, "eng": 376, "er": 0.0713743356112377, "ret": 0.496016944439947, "best": 2063, "cat": "Di Atas Target"}, {"creator": "Diarybaca_fany", "count": 4, "views": 8064, "eng": 456, "er": 0.0565476190476191, "ret": 0.604730214269331, "best": 2838, "cat": "Di Atas Target"}, {"creator": "Ranyzakyaaa", "count": 3, "views": 7180, "eng": 235, "er": 0.0327298050139276, "ret": 0.386569490902071, "best": 3699, "cat": "Di Atas Target"}, {"creator": "Setiyani_anggun", "count": 4, "views": 7095, "eng": 316, "er": 0.044538407329105, "ret": 0.561404377412567, "best": 2865, "cat": "Di Atas Target"}, {"creator": "Dreamofgirl89_", "count": 4, "views": 9113, "eng": 506, "er": 0.0555250740700099, "ret": 0.512592388971002, "best": 5929, "cat": "Di Atas Target"}, {"creator": "Tulisandynana07_", "count": 2, "views": 4462, "eng": 126, "er": 0.0282384580905424, "ret": 0.648013973373495, "best": 2494, "cat": "Perlu Ditingkatkan"}], "September": [{"creator": "Lilrhymer", "count": 4, "views": 4443, "eng": 350, "er": 0.078775602070673, "ret": 0.432816369137714, "best": 1454, "cat": "Di Atas Target"}, {"creator": "Iffahnsh", "count": 4, "views": 3911, "eng": 303, "er": 0.0774737918690872, "ret": 0.403919621696571, "best": 1461, "cat": "Di Atas Target"}, {"creator": "Aku_lillah", "count": 4, "views": 12127, "eng": 648, "er": 0.0534344850333966, "ret": 0.543606004767784, "best": 8364, "cat": "Di Atas Target"}, {"creator": "Feet_depp", "count": 4, "views": 5512, "eng": 417, "er": 0.0756531204644412, "ret": 0.465832979676932, "best": 1721, "cat": "Di Atas Target"}, {"creator": "Mrmusy_afak", "count": 4, "views": 6539, "eng": 305, "er": 0.0466432176173727, "ret": 0.469175113341679, "best": 2589, "cat": "Di Atas Target"}, {"creator": "Arman_ranala", "count": 4, "views": 3376, "eng": 245, "er": 0.0725710900473934, "ret": 0.462066948783491, "best": 1333, "cat": "Di Atas Target"}, {"creator": "Bluetherealz", "count": 4, "views": 4176, "eng": 434, "er": 0.103927203065134, "ret": 0.47295019559381, "best": 1902, "cat": "Di Atas Target"}, {"creator": "Tulisandynana07_", "count": 4, "views": 7800, "eng": 292, "er": 0.0374358974358974, "ret": 0.54853247884457, "best": 2378, "cat": "Di Atas Target"}, {"creator": "Diarybaca_fany", "count": 4, "views": 22085, "eng": 817, "er": 0.0369934344577768, "ret": 0.553831267164411, "best": 9718, "cat": "Di Atas Target"}, {"creator": "Setiyani_anggun", "count": 4, "views": 4817, "eng": 284, "er": 0.0589578575877102, "ret": 0.458150394882642, "best": 1970, "cat": "Di Atas Target"}, {"creator": "Birruya__", "count": 4, "views": 2717, "eng": 202, "er": 0.0743467059256533, "ret": 0.42220669031713, "best": 1055, "cat": "Di Atas Target"}, {"creator": "Tidakadarumahuntukku", "count": 4, "views": 23778, "eng": 602, "er": 0.0253175203970056, "ret": 0.513776749486476, "best": 11523, "cat": "Perlu Ditingkatkan"}]}, "campaignPerformance": [["Mrmusy_afak", "Carousel 1", "Carousel", 2946, 1119, 105, 0.0356415478615071, "Di Atas Target", 0.379837067209776, "Agustus"], ["Mrmusy_afak", "Reels 1", "Reels", 1151, 709, 69, 0.0599478714161599, "Di Atas Target", 0.615986099044309, "Agustus"], ["Mrmusy_afak", "Carousel 2", "Carousel", 1832, 788, 79, 0.0431222707423581, "Di Atas Target", 0.430131004366812, "Agustus"], ["Mrmusy_afak", "Reels 2", "Reels", 665, 451, 53, 0.0796992481203008, "Di Atas Target", 0.678195488721805, "Agustus"], ["Raniqolbi", "Carousel 1", "Carousel", 1267, 502, 81, 0.063930544593528, "Di Atas Target", 0.396211523283346, "Agustus"], ["Raniqolbi", "Reels 1", "Reels", 551, 365, 45, 0.0816696914700544, "Di Atas Target", 0.662431941923775, "Agustus"], ["Raniqolbi", "Carousel 2", "Carousel", 2891, 1673, 131, 0.0453130404704255, "Di Atas Target", 0.578692493946731, "Agustus"], ["Raniqolbi", "Reels 2", "Reels", 634, 543, 31, 0.0488958990536278, "Di Atas Target", 0.856466876971609, "Agustus"], ["Iffahnsh", "Carousel 1", "Carousel", 1405, 417, 72, 0.0512455516014235, "Di Atas Target", 0.296797153024911, "Agustus"], ["Iffahnsh", "Reels 1", "Reels", 936, 411, 40, 0.0427350427350427, "Di Atas Target", 0.439102564102564, "Agustus"], ["Iffahnsh", "Carousel 2", "Carousel", 2961, 932, 117, 0.0395136778115502, "Di Atas Target", 0.314758527524485, "Agustus"], ["Irmanaeni", "Carousel 1", "Carousel", 2063, 781, 118, 0.0571982549684925, "Di Atas Target", 0.378574890935531, "Agustus"], ["Irmanaeni", "Reels 1", "Reels", 1950, 1023, 145, 0.0743589743589744, "Di Atas Target", 0.524615384615385, "Agustus"], ["Irmanaeni", "Reels 2", "Reels", 1255, 734, 113, 0.0900398406374502, "Di Atas Target", 0.584860557768924, "Agustus"], ["Diarybaca_fany", "Carousel 1", "Carousel", 2064, 704, 137, 0.0663759689922481, "Di Atas Target", 0.341085271317829, "Agustus"], ["Diarybaca_fany", "Reels 1", "Reels", 1432, 1141, 71, 0.0495810055865922, "Di Atas Target", 0.796787709497207, "Agustus"], ["Diarybaca_fany", "Carousel 2", "Carousel", 2838, 1316, 181, 0.0637773079633545, "Di Atas Target", 0.463706835799859, "Agustus"], ["Diarybaca_fany", "Reels 2", "Reels", 1730, 1414, 67, 0.038728323699422, "Di Atas Target", 0.817341040462428, "Agustus"], ["Ranyzakyaaa", "Carousel 1", "Carousel", 1993, 632, 86, 0.0431510286001004, "Di Atas Target", 0.317109884596086, "Agustus"], ["Ranyzakyaaa", "Reels 1", "Reels", 1488, 831, 71, 0.0477150537634409, "Di Atas Target", 0.558467741935484, "Agustus"], ["Ranyzakyaaa", "Carousel 2", "Carousel", 3699, 1051, 78, 0.0210867802108678, "Perlu Ditingkatkan", 0.284130846174642, "Agustus"], ["Setiyani_anggun", "Carousel 1", "Carousel", 1638, 603, 85, 0.0518925518925519, "Di Atas Target", 0.368131868131868, "Agustus"], ["Setiyani_anggun", "Reels 1", "Reels", 1091, 634, 69, 0.0632447296058662, "Di Atas Target", 0.581118240146655, "Agustus"], ["Setiyani_anggun", "Carousel 2", "Carousel", 2865, 1813, 69, 0.0240837696335079, "Perlu Ditingkatkan", 0.632809773123909, "Agustus"], ["Setiyani_anggun", "Reels 2", "Reels", 1501, 996, 93, 0.0619586942038641, "Di Atas Target", 0.663557628247835, "Agustus"], ["Dreamofgirl89_", "Carousel 1", "Carousel", 1228, 451, 114, 0.0928338762214984, "Di Atas Target", 0.367263843648208, "Agustus"], ["Dreamofgirl89_", "Reels 1", "Reels", 1074, 671, 124, 0.115456238361266, "Di Atas Target", 0.624767225325885, "Agustus"], ["Dreamofgirl89_", "Carousel 2", "Carousel", 5929, 2013, 139, 0.0234440883791533, "Perlu Ditingkatkan", 0.339517625231911, "Agustus"], ["Dreamofgirl89_", "Reels 2", "Reels", 882, 634, 129, 0.146258503401361, "Di Atas Target", 0.718820861678005, "Agustus"], ["Tulisandynana07_", "Reels 1", "Reels", 1968, 1247, 55, 0.0279471544715447, "Perlu Ditingkatkan", 0.633638211382114, "Agustus"], ["Tulisandynana07_", "Reels 2", "Reels", 2494, 1652, 71, 0.0284683239775461, "Perlu Ditingkatkan", 0.662389735364876, "Agustus"], ["Lilrhymer", "Carousel 1", "Carousel", 1306, 390, 87, 0.0666156202143951, "Di Atas Target", 0.298621745788668, "September"], ["Lilrhymer", "Reels 1", "Reels", 624, 305, 63, 0.100961538461538, "Di Atas Target", 0.488782051282051, "September"], ["Lilrhymer", "Carousel 2", "Carousel", 1454, 517, 107, 0.0735900962861073, "Di Atas Target", 0.355570839064649, "September"], ["Lilrhymer", "Reels 2", "Reels", 1059, 623, 93, 0.0878186968838527, "Di Atas Target", 0.588290840415486, "September"], ["Iffahnsh", "Carousel 1", "Carousel", 1461, 500, 89, 0.0609171800136893, "Di Atas Target", 0.342231348391513, "September"], ["Iffahnsh", "Reels 1", "Reels", 1126, 527, 106, 0.0941385435168739, "Di Atas Target", 0.468028419182948, "September"], ["Iffahnsh", "Carousel 2", "Carousel", 512, 128, 29, 0.056640625, "Di Atas Target", 0.25, "September"], ["Iffahnsh", "Reels 2", "Reels", 812, 451, 79, 0.0972906403940887, "Di Atas Target", 0.555418719211823, "September"], ["Aku_lillah", "Carousel 1", "Carousel", 8364, 2745, 285, 0.0340746054519369, "Di Atas Target", 0.32819225251076, "September"], ["Aku_lillah", "Reels 1", "Reels", 999, 704, 107, 0.107107107107107, "Di Atas Target", 0.704704704704705, "September"], ["Aku_lillah", "Carousel 2", "Carousel", 1164, 423, 123, 0.105670103092784, "Di Atas Target", 0.36340206185567, "September"], ["Aku_lillah", "Reels 2", "Reels", 1600, 1245, 133, 0.083125, "Di Atas Target", 0.778125, "September"], ["Feet_depp", "Carousel 1", "Carousel", 1536, 506, 77, 0.0501302083333333, "Di Atas Target", 0.329427083333333, "September"], ["Feet_depp", "Reels 1", "Reels", 1535, 893, 140, 0.0912052117263844, "Di Atas Target", 0.581758957654723, "September"], ["Feet_depp", "Carousel 2", "Carousel", 720, 263, 37, 0.0513888888888889, "Di Atas Target", 0.365277777777778, "September"], ["Feet_depp", "Reels 2", "Reels", 1721, 1010, 163, 0.094712376525276, "Di Atas Target", 0.586868099941894, "September"], ["Mrmusy_afak", "Carousel 1", "Carousel", 2589, 791, 117, 0.0451911935110081, "Di Atas Target", 0.30552336809579, "September"], ["Mrmusy_afak", "Reels 1", "Reels", 891, 552, 51, 0.0572390572390572, "Di Atas Target", 0.61952861952862, "September"], ["Mrmusy_afak", "Carousel 2", "Carousel", 1999, 669, 79, 0.03951975987994, "Di Atas Target", 0.334667333666833, "September"], ["Mrmusy_afak", "Reels 2", "Reels", 1060, 654, 58, 0.0547169811320755, "Di Atas Target", 0.616981132075472, "September"], ["Arman_ranala", "Carousel 1", "Carousel", 893, 326, 74, 0.0828667413213886, "Di Atas Target", 0.365061590145577, "September"], ["Arman_ranala", "Reels 1", "Reels", 733, 408, 70, 0.0954979536152797, "Di Atas Target", 0.556616643929059, "September"], ["Arman_ranala", "Carousel 2", "Carousel", 1333, 420, 75, 0.0562640660165041, "Di Atas Target", 0.315078769692423, "September"], ["Arman_ranala", "Reels 2", "Reels", 417, 255, 26, 0.0623501199040767, "Di Atas Target", 0.611510791366906, "September"], ["Bluetherealz", "Carousel 1", "Carousel", 1902, 650, 163, 0.0856992639327024, "Di Atas Target", 0.341745531019979, "September"], ["Bluetherealz", "Reels 1", "Reels", 549, 340, 78, 0.14207650273224, "Di Atas Target", 0.619307832422587, "September"], ["Bluetherealz", "Carousel 2", "Carousel", 1196, 453, 128, 0.107023411371237, "Di Atas Target", 0.37876254180602, "September"], ["Bluetherealz", "Reels 2", "Reels", 529, 292, 65, 0.122873345935728, "Di Atas Target", 0.551984877126654, "September"], ["Tulisandynana07_", "Carousel 1", "Carousel", 2378, 860, 67, 0.028174936921783, "Perlu Ditingkatkan", 0.361648444070648, "September"], ["Tulisandynana07_", "Reels 1", "Reels", 1371, 906, 77, 0.0561633843909555, "Di Atas Target", 0.660831509846827, "September"], ["Tulisandynana07_", "Carousel 2", "Carousel", 2129, 834, 69, 0.0324095819633631, "Di Atas Target", 0.39173320807891, "September"], ["Tulisandynana07_", "Reels 2", "Reels", 1922, 1499, 79, 0.0411030176899063, "Di Atas Target", 0.779916753381894, "September"], ["Diarybaca_fany", "Carousel 1", "Carousel", 9718, 3582, 293, 0.0301502366742128, "Di Atas Target", 0.368594360979625, "September"], ["Diarybaca_fany", "Reels 1", "Reels", 2299, 1916, 102, 0.0443671161374511, "Di Atas Target", 0.83340582862114, "September"], ["Diarybaca_fany", "Carousel 2", "Carousel", 2820, 934, 128, 0.0453900709219858, "Di Atas Target", 0.331205673758865, "September"], ["Diarybaca_fany", "Reels 2", "Reels", 7248, 4944, 294, 0.0405629139072848, "Di Atas Target", 0.682119205298013, "September"], ["Setiyani_anggun", "Carousel 1", "Carousel", 897, 327, 45, 0.0501672240802676, "Di Atas Target", 0.364548494983278, "September"], ["Setiyani_anggun", "Reels 1", "Reels", 789, 459, 73, 0.0925221799746515, "Di Atas Target", 0.581749049429658, "September"], ["Setiyani_anggun", "Carousel 2", "Carousel", 1970, 638, 91, 0.0461928934010152, "Di Atas Target", 0.323857868020305, "September"], ["Setiyani_anggun", "Reels 2", "Reels", 1161, 653, 75, 0.0645994832041344, "Di Atas Target", 0.56244616709733, "September"], ["Birruya__", "Carousel 1", "Carousel", 1055, 392, 70, 0.0663507109004739, "Di Atas Target", 0.371563981042654, "September"], ["Birruya__", "Reels 1", "Reels", 508, 164, 52, 0.102362204724409, "Di Atas Target", 0.322834645669291, "September"], ["Birruya__", "Carousel 2", "Carousel", 654, 445, 50, 0.0764525993883792, "Di Atas Target", 0.680428134556575, "September"], ["Birruya__", "Reels 2", "Reels", 500, 157, 30, 0.06, "Di Atas Target", 0.314, "September"], ["Tidakadarumahuntukku", "Carousel 1", "Carousel", 4850, 1758, 56, 0.0115463917525773, "Perlu Ditingkatkan", 0.362474226804124, "September"], ["Tidakadarumahuntukku", "Reels 1", "Reels", 2908, 1923, 34, 0.0116918844566713, "Perlu Ditingkatkan", 0.661279229711142, "September"], ["Tidakadarumahuntukku", "Carousel 2", "Carousel", 4497, 1704, 73, 0.0162330442517234, "Perlu Ditingkatkan", 0.37891927951968, "September"], ["Tidakadarumahuntukku", "Reels 2", "Reels", 11523, 7518, 439, 0.0380977176082617, "Di Atas Target", 0.652434261910961, "September"]], "feedbackSummary": [{"dim": "Brief mudah dipahami", "gab": 4.23809523809524, "agu": 3.88888888888889, "sep": 4.5, "interpGab": "Positif", "interpAgu": "Cukup", "interpSep": "Positif", "signal": "Pertahankan"}, {"dim": "Brief campaign mudah dipahami & diikuti", "gab": 4.0952380952381, "agu": 3.77777777777778, "sep": 4.33333333333333, "interpGab": "Positif", "interpAgu": "Cukup", "interpSep": "Positif", "signal": "Pertahankan"}, {"dim": "Timeline dapat dikelola dengan baik", "gab": 3.80952380952381, "agu": 4, "sep": 3.66666666666667, "interpGab": "Cukup", "interpAgu": "Positif", "interpSep": "Cukup", "signal": "Review & optimalkan"}, {"dim": "Komunikasi berjalan efektif", "gab": 4.19047619047619, "agu": 4, "sep": 4.33333333333333, "interpGab": "Positif", "interpAgu": "Positif", "interpSep": "Positif", "signal": "Pertahankan"}, {"dim": "Informasi buku cukup membantu", "gab": 4.19047619047619, "agu": 4, "sep": 4.33333333333333, "interpGab": "Positif", "interpAgu": "Positif", "interpSep": "Positif", "signal": "Pertahankan"}], "recommendations": [{"area": "Content Format", "evGab": "Carousel", "insight": "Carousel memiliki average views lebih tinggi pada pilot.", "rec": "Prioritaskan format dengan performa lebih tinggi untuk pengujian berikutnya dan validasi kembali bersama ER serta retention.", "evAgu": "Carousel", "evSep": "Carousel"}, {"area": "Creator Performance", "evGab": "Bluetherealz", "insight": "Creator dengan average ER tertinggi menjadi salah satu evidence performa.", "rec": "Gunakan ER bersama views, retention, content fit, dan feedback; jangan memilih creator berdasarkan satu metrik saja.", "evAgu": "Irmanaeni", "evSep": "Bluetherealz"}, {"area": "Brief Quality", "evGab": "4.24/5", "insight": "Positif", "rec": "Tindak lanjuti Action Signal dari Feedback Summary untuk campaign berikutnya.", "evAgu": "3.89/5", "evSep": "4.50/5"}, {"area": "Timeline", "evGab": "3.81/5", "insight": "Cukup", "rec": "Tindak lanjuti Action Signal dari Feedback Summary untuk campaign berikutnya.", "evAgu": "4.00/5", "evSep": "3.67/5"}, {"area": "Communication", "evGab": "4.19/5", "insight": "Positif", "rec": "Tindak lanjuti Action Signal dari Feedback Summary untuk campaign berikutnya.", "evAgu": "4.00/5", "evSep": "4.33/5"}], "decisionLog": [{"area": "Content Format", "decision": "Mempertahankan komposisi 1 Carousel dan 1 Reels untuk masing-masing buku dan mengoptimalkan pendekatan konten berdasarkan performa masing-masing format", "pic": "Digital Marketing Supervisor", "status": "Pending", "kpi": "Rata-rata Views; Engagement Rate", "evAgu": "Carousel", "evSep": "Carousel"}, {"area": "Creator Selection", "decision": "Menggunakan data performa creator sebagai salah satu pertimbangan dalam pemilihan creator pada campaign berikutnya", "pic": "Digital Marketing Supervisor", "status": "Pending", "kpi": "Engagement Rate Creator; Retention Rate", "evAgu": "Irmanaeni", "evSep": "Bluetherealz"}, {"area": "Brief Improvement", "decision": "Memperjelas dan menyederhanakan brief campaign berikutnya", "pic": "Digital Marketing Supervisor", "status": "Pending", "kpi": "Skor Brief \u2265 4/5", "evAgu": "3.89/5", "evSep": "4.50/5"}, {"area": "Timeline Management", "decision": "Menambahkan reminder deadline 2\u20133 hari sebelum batas waktu publikasi", "pic": "Digital Marketing Supervisor", "status": "Pending", "kpi": "Skor Timeline \u2265 4/5; Ketepatan Waktu Publikasi", "evAgu": "4.00/5", "evSep": "3.67/5"}, {"area": "Communication Workflow", "decision": "Mempertahankan komunikasi yang responsif dan memperjelas alur koordinasi campaign", "pic": "Digital Marketing Supervisor", "status": "Pending", "kpi": "Skor Komunikasi \u2265 4/5", "evAgu": "4.00/5", "evSep": "4.33/5"}]};
+let activeMonth = 'Gabungan';
+const charts = {};
+function drawChart(id, config){
+  if(charts[id]) charts[id].destroy();
+  const ctx = document.getElementById(id);
+  charts[id] = new Chart(ctx, config);
+  return charts[id];
+}
+Chart.defaults.font.family = "'Inter',sans-serif";
+Chart.defaults.color = '#716C87';
 
 /* ---------- SIDEBAR NAV (SPA switch) ---------- */
-window.__allCharts = window.__allCharts || [];
 document.querySelectorAll('#sideNav button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('#sideNav button').forEach(b=>b.classList.remove('active'));
@@ -557,30 +524,153 @@ document.querySelectorAll('#sideNav button').forEach(btn=>{
     btn.classList.add('active');
     document.getElementById('page-'+btn.dataset.page).classList.add('active');
     window.scrollTo({top:0,behavior:'instant'});
-    requestAnimationFrame(()=>{ window.__allCharts.forEach(c=>{ if(c){ try{ c.resize(); } catch(e){} } }); });
+    requestAnimationFrame(()=>{ Object.values(charts).forEach(c=>{ if(c){ try{ c.resize(); } catch(e){} } }); });
   });
 });
 
-/* ---------- Sub-format table ---------- */
-const subFormatBody = document.getElementById('subFormatBody');
-subFormat.forEach(s=>{
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td>${s.name}</td><td>${s.count}</td><td>${fmtInt(s.totalViews)}</td><td>${fmtInt(s.avgViews)}</td><td>${fmtPct(s.avgER)}</td><td>${fmtPct(s.avgRet)}</td>`;
-  subFormatBody.appendChild(tr);
+/* ---------- Month toggle ---------- */
+document.querySelectorAll('#monthToggle button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#monthToggle button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeMonth = btn.dataset.month;
+    ['ringkasanFlag','formatFlag','creatorFlag','kontenFlag','top5Flag'].forEach(id=>{
+      const el = document.getElementById(id);
+      el.textContent = activeMonth === 'Gabungan' ? 'Gabungan (Agustus+September)' : activeMonth+' 2026';
+      el.className = 'month-flag '+activeMonth;
+    });
+    renderRingkasan(); renderFormat(); renderCreatorPage(); renderKonten(); renderTop5();
+  });
 });
 
-/* ---------- Creator table (sortable) ---------- */
-const creatorTableBody = document.getElementById('creatorTableBody');
-let creatorSortKey = 'er', creatorSortDir = -1;
+/* ================= RINGKASAN ================= */
+function renderKpiGrid(){
+  const k = DATA.kpi[activeMonth];
+  const grid = document.getElementById('kpiGrid1');
+  grid.innerHTML = `
+    <div class="kpi-card"><div class="icon" style="background:var(--violet-soft);color:var(--violet);">👁</div><div class="val">${fmtInt(k.views)}</div><div class="lbl">Total Views</div><span class="trend good">${k.content} konten</span></div>
+    <div class="kpi-card"><div class="icon" style="background:var(--coral-soft);color:var(--coral);">💬</div><div class="val">${fmtInt(k.eng)}</div><div class="lbl">Total Engagement</div><span class="trend good">Like+Comment+Repost+Send+Save</span></div>
+    <div class="kpi-card"><div class="icon" style="background:var(--teal-soft);color:var(--teal);">📈</div><div class="val">${fmtPct(k.er).replace('.',',')}</div><div class="lbl">Rata-rata Engagement Rate</div><span class="trend good">Target: 3%</span></div>
+    <div class="kpi-card"><div class="icon" style="background:var(--amber-soft);color:var(--amber);">⏱</div><div class="val">${fmtPct(k.ret).replace('.',',')}</div><div class="lbl">Rata-rata Retention Rate</div><span class="trend good">Viewers ÷ Views</span></div>`;
+}
+function renderMonthCompare(){
+  const rows = [
+    ['Jumlah Creator', DATA.kpi.Agustus.creators, DATA.kpi.September.creators, DATA.kpi.Gabungan.creators],
+    ['Jumlah Konten', DATA.kpi.Agustus.content, DATA.kpi.September.content, DATA.kpi.Gabungan.content],
+    ['Total Views', fmtInt(DATA.kpi.Agustus.views), fmtInt(DATA.kpi.September.views), fmtInt(DATA.kpi.Gabungan.views)],
+    ['Total Engagement', fmtInt(DATA.kpi.Agustus.eng), fmtInt(DATA.kpi.September.eng), fmtInt(DATA.kpi.Gabungan.eng)],
+    ['Avg Engagement Rate', fmtPct(DATA.kpi.Agustus.er), fmtPct(DATA.kpi.September.er), fmtPct(DATA.kpi.Gabungan.er)],
+    ['Avg Retention Rate', fmtPct(DATA.kpi.Agustus.ret), fmtPct(DATA.kpi.September.ret), fmtPct(DATA.kpi.Gabungan.ret)],
+    ['Konten ER Di Atas Target', 26, 44, 70],
+  ];
+  document.getElementById('monthCompareBody').innerHTML = rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+}
+function renderRingkasan(){
+  renderKpiGrid();
+  const k = DATA.kpi[activeMonth];
+  document.getElementById('ringkasanFlag').textContent = activeMonth==='Gabungan' ? 'Gabungan (Agustus+September)' : activeMonth+' 2026';
+  document.getElementById('ringkasanFlag').className = 'month-flag '+activeMonth;
+  document.getElementById('ringkasanSub').textContent = `Performa ${k.creators} creator dan ${k.content} konten — ${activeMonth==='Gabungan'?'gabungan Agustus + September 2026':activeMonth+' 2026'}.`;
+  document.getElementById('ringkasanPill').textContent = `${k.erAbove3}/${k.creators} creator di atas target ER`;
+
+  const fa = DATA.formatAgg[activeMonth];
+  drawChart('miniFormatChart', {type:'bar',
+    data:{labels:fa.map(f=>f.format), datasets:[{data:fa.map(f=>f.avgViews), backgroundColor:['#7C3AED','#FB7185'], borderRadius:8, maxBarThickness:60}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Rata-rata Views',font:{size:12,weight:600},color:'#1F1B33',align:'start'}},scales:{y:{beginAtZero:true,grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
+  });
+  const top5er = [...DATA.creatorInsights[activeMonth]].sort((a,b)=>b.er-a.er).slice(0,5);
+  drawChart('miniCreatorChart', {type:'bar',
+    data:{labels:top5er.map(c=>c.creator), datasets:[{data:top5er.map(c=>+(c.er*100).toFixed(2)), backgroundColor:PALETTE, borderRadius:8}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Top 5 Creator by ER (%)',font:{size:12,weight:600},color:'#1F1B33',align:'start'}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFFA'}},y:{grid:{display:false}}}}
+  });
+
+  const counts = DATA.contentCategory[activeMonth];
+  const labels = Object.keys(counts);
+  const colors = ['#10B981','#EF4444'];
+  const total = labels.reduce((s,l)=>s+counts[l],0);
+  drawChart('categoryDonutChart', {type:'doughnut',
+    data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} konten`}}}}
+  });
+  document.getElementById('categoryLegend').innerHTML = labels.map((l,i)=>{
+    const pct = ((counts[l]/total)*100).toFixed(1);
+    return `<div class="item"><span class="lbl"><span class="dot" style="background:${colors[i]};"></span>${l}</span><span><span class="num">${counts[l]}</span><span class="pct">(${pct}%)</span></span></div>`;
+  }).join('');
+  renderMonthCompare();
+}
+
+/* ================= FORMAT ================= */
+function renderFormat(){
+  document.getElementById('formatFlag').textContent = activeMonth==='Gabungan' ? 'Gabungan (Agustus+September)' : activeMonth+' 2026';
+  document.getElementById('formatFlag').className = 'month-flag '+activeMonth;
+  const fa = DATA.formatAgg[activeMonth];
+  drawChart('formatViewsChart', {type:'bar',
+    data:{labels:fa.map(f=>f.format),datasets:[{data:fa.map(f=>f.avgViews),backgroundColor:['#7C3AED','#FB7185'],borderRadius:8,maxBarThickness:70}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
+  });
+  drawChart('formatErChart', {type:'bar',
+    data:{labels:fa.map(f=>f.format),datasets:[
+      {label:'ER',data:fa.map(f=>+(f.avgER*100).toFixed(2)),backgroundColor:'#0EA5A5',borderRadius:8,maxBarThickness:46},
+      {label:'Retention',data:fa.map(f=>+(f.avgRet*100).toFixed(2)),backgroundColor:'#F59E0B',borderRadius:8,maxBarThickness:46},
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
+  });
+  document.getElementById('subFormatBody').innerHTML = DATA.subFormat[activeMonth].map(s=>
+    `<tr><td>${s.name}</td><td>${s.count}</td><td>${fmtInt(s.totalViews)}</td><td>${fmtInt(s.avgViews)}</td><td>${fmtPct(s.avgER)}</td><td>${fmtPct(s.avgRet)}</td></tr>`
+  ).join('');
+
+  const counts = {}; fa.forEach(f=>counts[f.format]=f.count);
+  const labels = Object.keys(counts);
+  const colors = ['#7C3AED','#FB7185'];
+  const total = labels.reduce((s,l)=>s+counts[l],0);
+  drawChart('formatShareDonutChart', {type:'doughnut',
+    data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} konten`}}}}
+  });
+  document.getElementById('formatShareLegend').innerHTML = labels.map((l,i)=>{
+    const pct = ((counts[l]/total)*100).toFixed(1);
+    return `<div class="item"><span class="lbl"><span class="dot" style="background:${colors[i]};"></span>${l}</span><span><span class="num">${counts[l]}</span><span class="pct">(${pct}%)</span></span></div>`;
+  }).join('');
+}
+
+/* ================= CREATOR ================= */
+let creatorSortKey = 'er', creatorSortDir = -1, creatorMetric = 'er';
+function activeMonthsForCreator(name){
+  const months = new Set();
+  DATA.campaignPerformance.forEach(r=>{ if(r[0]===name) months.add(r[9]); });
+  return [...months].join(' & ');
+}
 function renderCreatorTable(){
-  const rows = [...creatorInsights].sort((a,b)=> (a[creatorSortKey] > b[creatorSortKey] ? 1 : -1) * creatorSortDir);
-  creatorTableBody.innerHTML='';
-  rows.forEach(c=>{
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${c.creator}</td><td>${c.count}</td><td>${fmtInt(c.views)}</td><td>${fmtPct(c.er)}</td><td>${fmtPct(c.ret)}</td>`;
-    creatorTableBody.appendChild(tr);
+  const rows = [...DATA.creatorInsights[activeMonth]].sort((a,b)=> (a[creatorSortKey] > b[creatorSortKey] ? 1 : -1) * creatorSortDir);
+  document.getElementById('creatorTableBody').innerHTML = rows.map(c=>
+    `<tr><td>${c.creator}</td><td>${c.count}</td><td>${fmtInt(c.views)}</td><td>${fmtPct(c.er)}</td><td>${fmtPct(c.ret)}</td><td>${activeMonth==='Gabungan'?activeMonthsForCreator(c.creator):activeMonth}</td></tr>`
+  ).join('');
+}
+function updateCreatorLegend(metric){
+  const el = document.getElementById('creatorChartLegend');
+  if(metric==='er') el.innerHTML = '<span><span class="dot" style="background:var(--red);"></span>ER di bawah 3% (perlu perhatian)</span><span><span class="dot" style="background:var(--violet);"></span>ER di atas target</span>';
+  else if(metric==='views') el.innerHTML = '<span><span class="dot" style="background:var(--violet);"></span>Total Views per creator (warna berbeda tiap creator)</span>';
+  else el.innerHTML = '<span><span class="dot" style="background:var(--violet);"></span>Retention Rate per creator (warna berbeda tiap creator)</span>';
+}
+function drawCreatorChart(){
+  updateCreatorLegend(creatorMetric);
+  const sorted = [...DATA.creatorInsights[activeMonth]].sort((a,b)=>b[creatorMetric]-a[creatorMetric]);
+  const isPct = creatorMetric==='er' || creatorMetric==='ret';
+  const data = sorted.map(c=> isPct ? +(c[creatorMetric]*100).toFixed(2) : c[creatorMetric]);
+  document.getElementById('creatorChartWrap').style.height = Math.max(280, sorted.length*26) + 'px';
+  drawChart('creatorChart', {type:'bar',
+    data:{labels:sorted.map(c=>c.creator),datasets:[{data, backgroundColor:sorted.map((c,i)=> creatorMetric==='er' && c.er<0.03 ? '#EF4444' : PALETTE[i%PALETTE.length]), borderRadius:8}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{callback:v=> isPct ? v+'%' : fmtInt(v)},grid:{color:'#F1EFFA'}},y:{grid:{display:false}}}}
   });
 }
+document.querySelectorAll('#creatorMetricToggle button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#creatorMetricToggle button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    creatorMetric = btn.dataset.metric;
+    drawCreatorChart();
+  });
+});
 document.querySelectorAll('#page-creator thead th[data-key]').forEach(th=>{
   th.addEventListener('click', ()=>{
     const key = th.dataset.key;
@@ -589,222 +679,117 @@ document.querySelectorAll('#page-creator thead th[data-key]').forEach(th=>{
     renderCreatorTable();
   });
 });
-renderCreatorTable();
+function renderCreatorPage(){
+  document.getElementById('creatorFlag').textContent = activeMonth==='Gabungan' ? 'Gabungan (Agustus+September)' : activeMonth+' 2026';
+  document.getElementById('creatorFlag').className = 'month-flag '+activeMonth;
+  renderCreatorTable();
+  drawCreatorChart();
+}
 
-/* ---------- Performance table (filter + search) ---------- */
-const perfTableBody = document.getElementById('perfTableBody');
-const perfCount = document.getElementById('perfCount');
+/* ================= KONTEN ================= */
 let currentFilter='all', currentSearch='';
-function renderPerfTable(){
-  perfTableBody.innerHTML='';
-  const rows = campaignPerformance.filter(r=>{
+function renderKonten(){
+  document.getElementById('kontenFlag').textContent = activeMonth==='Gabungan' ? 'Gabungan (Agustus+September)' : activeMonth+' 2026';
+  document.getElementById('kontenFlag').className = 'month-flag '+activeMonth;
+  const k = DATA.kpi[activeMonth];
+  document.getElementById('kontenSub').textContent = `${k.content} konten (${activeMonth==='Gabungan'?'Agustus+September 2026':activeMonth+' 2026'}) — filter per format atau cari nama creator.`;
+  const rows = DATA.campaignPerformance.filter(r=>{
+    const mMonth = activeMonth==='Gabungan' || r[9]===activeMonth;
     const mF = currentFilter==='all' || r[2]===currentFilter;
     const mS = r[0].toLowerCase().includes(currentSearch.toLowerCase());
-    return mF && mS;
+    return mMonth && mF && mS;
   });
-  rows.forEach(r=>{
-    const [creator,content,format,views,viewers,eng,er,cat,ret]=r;
+  document.getElementById('perfTableBody').innerHTML = rows.map(r=>{
+    const [creator,content,format,views,viewers,eng,er,cat,ret,bulan]=r;
     const pillClass = cat==='Di Atas Target' ? 'pos':'neg';
-    const tr=document.createElement('tr');
-    tr.innerHTML = `<td>${creator}</td><td>${content}</td><td>${format}</td><td>${fmtInt(views)}</td><td>${fmtInt(viewers)}</td><td>${fmtInt(eng)}</td><td>${fmtPct(er)}</td><td>${fmtPct(ret)}</td><td><span class="pill ${pillClass}">${cat}</span></td>`;
-    perfTableBody.appendChild(tr);
-  });
-  perfCount.textContent = `Menampilkan ${rows.length} dari ${campaignPerformance.length} konten.`;
+    return `<tr><td>${creator}</td><td>${content}</td><td>${format}</td><td>${fmtInt(views)}</td><td>${fmtInt(viewers)}</td><td>${fmtInt(eng)}</td><td>${fmtPct(er)}</td><td>${fmtPct(ret)}</td><td><span class="pill ${pillClass}">${cat}</span></td><td>${bulan}</td></tr>`;
+  }).join('');
+  document.getElementById('perfCount').textContent = `Menampilkan ${rows.length} dari ${DATA.campaignPerformance.length} konten total.`;
 }
-renderPerfTable();
 document.querySelectorAll('.chip').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('.chip').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     currentFilter = btn.dataset.filter;
-    renderPerfTable();
+    renderKonten();
   });
 });
-document.getElementById('searchInput').addEventListener('input', e=>{
-  currentSearch = e.target.value;
-  renderPerfTable();
-});
+document.getElementById('searchInput').addEventListener('input', e=>{ currentSearch = e.target.value; renderKonten(); });
 
-/* ---------- Feedback notes ---------- */
-const feedbackNotes = document.getElementById('feedbackNotes');
-feedbackSummary.forEach(f=>{
-  const el = document.createElement('div');
-  el.style.cssText='padding:12px 0;border-top:1px solid var(--border);font-size:13.5px;';
-  const pillClass = f.tag==='pos' ? 'pos':'neu';
-  el.innerHTML = `<span class="pill ${pillClass}">${f.interp}</span> <strong>${f.dim}</strong> — ${fmt1(f.avg)}/5<div style="color:var(--muted);font-size:12.5px;margin-top:4px;">${f.signal}</div>`;
-  feedbackNotes.appendChild(el);
-});
-if(feedbackNotes.firstChild) feedbackNotes.firstChild.style.borderTop='none';
-
-/* ---------- Recommendation cards ---------- */
-const recGrid = document.getElementById('recGrid');
-recommendations.forEach(r=>{
-  const el = document.createElement('div');
-  el.className='rec-card';
-  el.innerHTML = `<div class="area">${r.area}</div><div class="insight">${r.insight}</div><div class="rec">${r.rec}</div><span class="status">Open</span>`;
-  recGrid.appendChild(el);
-});
-
-/* ---------- Top 5 rekomendasi username IG (kerjasama bulan depan) ---------- */
-const top5Creators = [...creatorInsights]
-  .sort((a,b)=> (b.er - a.er) || (b.ret - a.ret))
-  .slice(0,5)
-  .map(c=>{
-    const avgViews = c.views / c.count;
-    let alasan;
-    if(c.er >= 0.06) alasan = 'ER tertinggi pada pilot, indikasi audience fit yang kuat.';
-    else if(c.ret >= 0.60) alasan = 'ER solid didukung retention tinggi — konten ditonton sampai akhir.';
-    else alasan = 'Kombinasi ER dan retention konsisten di atas rata-rata pilot.';
-    return {...c, avgViews, alasan};
+/* ================= FEEDBACK (static Agustus vs September) ================= */
+function renderFeedback(){
+  drawChart('feedbackChart', {type:'bar',
+    data:{labels:DATA.feedbackSummary.map(f=>f.dim),datasets:[
+      {label:'Agustus',data:DATA.feedbackSummary.map(f=>f.agu),backgroundColor:'#0EA5A5',borderRadius:6},
+      {label:'September',data:DATA.feedbackSummary.map(f=>f.sep),backgroundColor:'#FB7185',borderRadius:6},
+    ]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{min:0,max:5,grid:{color:'#F1EFFA'}},y:{grid:{display:false},ticks:{autoSkip:false,font:{size:11}}}}}
   });
-const top5Body = document.getElementById('top5Body');
-top5Creators.forEach((c,i)=>{
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td><span class="pill pos">#${i+1}</span></td><td>@${c.creator.toLowerCase()}</td><td>${c.count}</td><td>${fmtInt(c.avgViews)}</td><td>${fmtPct(c.er)}</td><td>${fmtPct(c.ret)}</td><td style="white-space:normal;min-width:220px;color:var(--muted);font-size:12.5px;">${c.alasan}</td>`;
-  top5Body.appendChild(tr);
-});
+  document.getElementById('feedbackTableBody').innerHTML = DATA.feedbackSummary.map(f=>{
+    const pillClass = f.interpGab==='Positif' ? 'pos':'neu';
+    return `<tr><td>${f.dim}</td><td>${fmt1(f.agu)}/5 <span class="pill ${f.interpAgu==='Positif'?'pos':'neu'}" style="margin-left:4px;">${f.interpAgu}</span></td><td>${fmt1(f.sep)}/5 <span class="pill ${f.interpSep==='Positif'?'pos':'neu'}" style="margin-left:4px;">${f.interpSep}</span></td><td>${fmt1(f.gab)}/5 <span class="pill ${pillClass}">${f.interpGab}</span></td><td>${f.interpGab}</td><td style="color:var(--muted);">${f.signal}</td></tr>`;
+  }).join('');
 
-/* ---------- Decision table ---------- */
-const decisionTableBody = document.getElementById('decisionTableBody');
-decisionLog.forEach(d=>{
-  const tr=document.createElement('tr');
-  tr.innerHTML = `<td>${d.area}</td><td style="white-space:normal;min-width:260px;">${d.decision}</td><td>${d.pic}</td><td><span class="pill neu">${d.status}</span></td><td style="white-space:normal;min-width:180px;">${d.kpi}</td>`;
-  decisionTableBody.appendChild(tr);
-});
-
-/* ---------- CHARTS ---------- */
-window.__allCharts = window.__allCharts || [];
-Chart.defaults.font.family = "'Inter',sans-serif";
-Chart.defaults.color = '#716C87';
-
-window.__allCharts.push(new Chart(document.getElementById('miniFormatChart'),{
-  type:'bar',
-  data:{ labels:formatAgg.map(f=>f.format), datasets:[{label:'Avg Views', data:formatAgg.map(f=>f.avgViews), backgroundColor:['#7C3AED','#FB7185'], borderRadius:8, maxBarThickness:60}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Rata-rata Views',font:{size:12,weight:600},color:'#1F1B33',align:'start'}},scales:{y:{beginAtZero:true,grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
-}));
-window.__allCharts.push(new Chart(document.getElementById('miniCreatorChart'),{
-  type:'bar',
-  data:{ labels:[...creatorInsights].sort((a,b)=>b.er-a.er).slice(0,5).map(c=>c.creator), datasets:[{data:[...creatorInsights].sort((a,b)=>b.er-a.er).slice(0,5).map(c=>+(c.er*100).toFixed(2)), backgroundColor:PALETTE, borderRadius:8}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},title:{display:true,text:'Top 5 Creator by ER (%)',font:{size:12,weight:600},color:'#1F1B33',align:'start'}},scales:{x:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFFA'}},y:{grid:{display:false}}}}
-}));
-
-window.__allCharts.push(new Chart(document.getElementById('formatViewsChart'),{
-  type:'bar',
-  data:{labels:formatAgg.map(f=>f.format),datasets:[{data:formatAgg.map(f=>f.avgViews),backgroundColor:['#7C3AED','#FB7185'],borderRadius:8,maxBarThickness:70}]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
-}));
-window.__allCharts.push(new Chart(document.getElementById('formatErChart'),{
-  type:'bar',
-  data:{labels:formatAgg.map(f=>f.format),datasets:[
-    {label:'ER',data:formatAgg.map(f=>+(f.avgER*100).toFixed(2)),backgroundColor:'#0EA5A5',borderRadius:8,maxBarThickness:46},
-    {label:'Retention',data:formatAgg.map(f=>+(f.avgRet*100).toFixed(2)),backgroundColor:'#F59E0B',borderRadius:8,maxBarThickness:46},
-  ]},
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'%'},grid:{color:'#F1EFFA'}},x:{grid:{display:false}}}}
-}));
-
-let creatorChartInstance;
-const creatorChartLegend = document.getElementById('creatorChartLegend');
-function updateCreatorLegend(metric){
-  if(metric==='er'){
-    creatorChartLegend.innerHTML = '<span><span class="dot" style="background:var(--red);"></span>ER di bawah 3% (perlu perhatian)</span><span><span class="dot" style="background:var(--violet);"></span>ER di atas target</span>';
-  } else if(metric==='views'){
-    creatorChartLegend.innerHTML = '<span><span class="dot" style="background:var(--violet);"></span>Total Views per creator (warna berbeda tiap creator)</span>';
-  } else {
-    creatorChartLegend.innerHTML = '<span><span class="dot" style="background:var(--violet);"></span>Retention Rate per creator (warna berbeda tiap creator)</span>';
-  }
-}
-function drawCreatorChart(metric){
-  updateCreatorLegend(metric);
-  const sorted = [...creatorInsights].sort((a,b)=>b[metric]-a[metric]);
-  const isPct = metric==='er' || metric==='ret';
-  const data = sorted.map(c=> isPct ? +(c[metric]*100).toFixed(2) : c[metric]);
-  const ctx = document.getElementById('creatorChart');
-  if(creatorChartInstance) creatorChartInstance.destroy();
-  creatorChartInstance = new Chart(ctx,{
-    type:'bar',
-    data:{labels:sorted.map(c=>c.creator),datasets:[{data, backgroundColor:sorted.map((c,i)=> metric==='er' && c.er<0.03 ? '#EF4444' : PALETTE[i%PALETTE.length]), borderRadius:8}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{callback:v=> isPct ? v+'%' : fmtInt(v)},grid:{color:'#F1EFFA'}},y:{grid:{display:false}}}}
-  });
-  window.__allCharts.push(creatorChartInstance);
-}
-drawCreatorChart('er');
-document.querySelectorAll('#creatorMetricToggle button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('#creatorMetricToggle button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    drawCreatorChart(btn.dataset.metric);
-  });
-});
-
-/* ---------- Donut: Distribusi Kategori Konten ---------- */
-(function(){
-  const counts = {'Di Atas Target':0, 'Perlu Ditingkatkan':0};
-  campaignPerformance.forEach(r=>{ counts[r[7]] = (counts[r[7]]||0) + 1; });
-  const total = campaignPerformance.length;
-  const labels = Object.keys(counts);
-  const colors = ['#10B981','#EF4444'];
-  window.__allCharts.push(new Chart(document.getElementById('categoryDonutChart'),{
-    type:'doughnut',
-    data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} konten`}}}}
-  }));
-  const legend = document.getElementById('categoryLegend');
-  labels.forEach((l,i)=>{
-    const pct = ((counts[l]/total)*100).toFixed(1);
-    const el = document.createElement('div'); el.className='item';
-    el.innerHTML = `<span class="lbl"><span class="dot" style="background:${colors[i]};"></span>${l}</span><span><span class="num">${counts[l]}</span><span class="pct">(${pct}%)</span></span>`;
-    legend.appendChild(el);
-  });
-})();
-
-/* ---------- Donut: Distribusi Format ---------- */
-(function(){
-  const counts = {Carousel:0, Reels:0};
-  subFormat.forEach(s=>{ const fmt = s.name.startsWith('Carousel') ? 'Carousel':'Reels'; counts[fmt]+=s.count; });
-  const total = counts.Carousel + counts.Reels;
-  const labels = Object.keys(counts);
-  const colors = ['#7C3AED','#FB7185'];
-  window.__allCharts.push(new Chart(document.getElementById('formatShareDonutChart'),{
-    type:'doughnut',
-    data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} konten`}}}}
-  }));
-  const legend = document.getElementById('formatShareLegend');
-  labels.forEach((l,i)=>{
-    const pct = ((counts[l]/total)*100).toFixed(1);
-    const el = document.createElement('div'); el.className='item';
-    el.innerHTML = `<span class="lbl"><span class="dot" style="background:${colors[i]};"></span>${l}</span><span><span class="num">${counts[l]}</span><span class="pct">(${pct}%)</span></span>`;
-    legend.appendChild(el);
-  });
-})();
-
-/* ---------- Donut: Distribusi Sentimen Feedback ---------- */
-(function(){
   const counts = {};
-  feedbackSummary.forEach(f=>{ counts[f.interp] = (counts[f.interp]||0) + 1; });
-  const total = feedbackSummary.length;
+  DATA.feedbackSummary.forEach(f=>{ counts[f.interpGab] = (counts[f.interpGab]||0) + 1; });
+  const total = DATA.feedbackSummary.length;
   const labels = Object.keys(counts);
   const colorMap = {Positif:'#10B981', Cukup:'#F59E0B'};
   const colors = labels.map(l=>colorMap[l] || '#7C3AED');
-  window.__allCharts.push(new Chart(document.getElementById('feedbackDonutChart'),{
-    type:'doughnut',
+  drawChart('feedbackDonutChart', {type:'doughnut',
     data:{labels, datasets:[{data:labels.map(l=>counts[l]), backgroundColor:colors, borderWidth:0, hoverOffset:6}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} dimensi`}}}}
-  }));
-  const legend = document.getElementById('feedbackDonutLegend');
-  labels.forEach((l,i)=>{
-    const pct = ((counts[l]/total)*100).toFixed(1);
-    const el = document.createElement('div'); el.className='item';
-    el.innerHTML = `<span class="lbl"><span class="dot" style="background:${colors[i]};"></span>${l}</span><span><span class="num">${counts[l]}</span><span class="pct">(${pct}%)</span></span>`;
-    legend.appendChild(el);
   });
-})();
+  document.getElementById('feedbackDonutLegend').innerHTML = labels.map((l,i)=>{
+    const pct = ((counts[l]/total)*100).toFixed(1);
+    return `<div class="item"><span class="lbl"><span class="dot" style="background:${colors[i]};"></span>${l}</span><span><span class="num">${counts[l]}</span><span class="pct">(${pct}%)</span></span></div>`;
+  }).join('');
+}
 
-window.__allCharts.push(new Chart(document.getElementById('feedbackChart'),{
-  type:'bar',
-  data:{labels:feedbackSummary.map(f=>f.dim),datasets:[{data:feedbackSummary.map(f=>f.avg),backgroundColor:feedbackSummary.map(f=>f.tag==='pos'?'#10B981':'#F59E0B'),borderRadius:8}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{min:0,max:5,grid:{color:'#F1EFFA'}},y:{grid:{display:false},ticks:{autoSkip:false,font:{size:11}}}}}
-}));
+/* ================= REKOMENDASI ================= */
+function renderRecGrid(){
+  document.getElementById('recGrid').innerHTML = DATA.recommendations.map(r=>
+    `<div class="rec-card"><div class="area">${r.area}</div><div class="insight">${r.insight}</div><div class="rec">${r.rec}</div>
+     <div style="margin-top:10px;font-size:12px;color:var(--muted);">Evidence — Agustus: <strong>${r.evAgu}</strong> · September: <strong>${r.evSep}</strong> · Gabungan: <strong>${r.evGab}</strong></div>
+     <span class="status">Open</span></div>`
+  ).join('');
+}
+function renderTop5(){
+  document.getElementById('top5Flag').textContent = activeMonth==='Gabungan' ? 'Gabungan (Agustus+September)' : activeMonth+' 2026';
+  document.getElementById('top5Flag').className = 'month-flag '+activeMonth;
+  const top5 = [...DATA.creatorInsights[activeMonth]]
+    .sort((a,b)=> (b.er - a.er) || (b.ret - a.ret))
+    .slice(0,5)
+    .map(c=>{
+      const avgViews = c.views / c.count;
+      let alasan;
+      if(c.er >= 0.06) alasan = 'ER tertinggi pada periode ini, indikasi audience fit yang kuat.';
+      else if(c.ret >= 0.60) alasan = 'ER solid didukung retention tinggi — konten ditonton sampai akhir.';
+      else alasan = 'Kombinasi ER dan retention konsisten di atas rata-rata periode ini.';
+      return {...c, avgViews, alasan};
+    });
+  document.getElementById('top5Body').innerHTML = top5.map((c,i)=>
+    `<tr><td><span class="pill pos">#${i+1}</span></td><td>@${c.creator.toLowerCase()}</td><td>${c.count}</td><td>${fmtInt(c.avgViews)}</td><td>${fmtPct(c.er)}</td><td>${fmtPct(c.ret)}</td><td style="white-space:normal;min-width:220px;color:var(--muted);font-size:12.5px;">${c.alasan}</td></tr>`
+  ).join('');
+}
+
+/* ================= KEPUTUSAN ================= */
+function renderDecisionLog(){
+  document.getElementById('decisionTableBody').innerHTML = DATA.decisionLog.map(d=>
+    `<tr><td>${d.area}</td><td style="white-space:normal;min-width:260px;">${d.decision}</td><td>${d.evAgu}</td><td>${d.evSep}</td><td>${d.pic}</td><td><span class="pill neu">${d.status}</span></td><td style="white-space:normal;min-width:180px;">${d.kpi}</td></tr>`
+  ).join('');
+}
+
+/* ---------- INIT ---------- */
+renderRingkasan();
+renderFormat();
+renderCreatorPage();
+renderKonten();
+renderFeedback();
+renderRecGrid();
+renderTop5();
+renderDecisionLog();
+
 </script>
 </body>
 </html>
